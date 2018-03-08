@@ -16,10 +16,15 @@
 <meta property="og:site_name" content="肝！-MistEO的博客">
 <meta property="og:description" content="既然说好的打造技术博客，总的写点干货什么的，正好前些日子买个了新的ss服务，买完一看加密方式是chacha20-ietf-poly1305，再一看Shadowsocks-Qt5在Ubuntu的软件源里面最新版本只是2.9，不支持啊，退款又退不了很尴尬，于是只能自己研究一下怎么弄了，遇到了不少坑，和大家分享一下经验方法。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-03-08T04:51:26.000Z">
+<meta property="og:image" content="http://www.misteo.top/post_images/ss.png">
+<meta property="og:image" content="http://www.misteo.top/post_images/ss-qt5.png">
+<meta property="og:image" content="http://www.misteo.top/post_images/ss-connect.png">
+<meta property="og:image" content="http://www.misteo.top/post_images/file-settings.png">
+<meta property="og:updated_time" content="2018-03-08T08:39:59.653Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ubuntu下源码编译安装最新版Shadowsocks-Qt5">
 <meta name="twitter:description" content="既然说好的打造技术博客，总的写点干货什么的，正好前些日子买个了新的ss服务，买完一看加密方式是chacha20-ietf-poly1305，再一看Shadowsocks-Qt5在Ubuntu的软件源里面最新版本只是2.9，不支持啊，退款又退不了很尴尬，于是只能自己研究一下怎么弄了，遇到了不少坑，和大家分享一下经验方法。">
+<meta name="twitter:image" content="http://www.misteo.top/post_images/ss.png">
   
     <link rel="alternative" href="/atom.xml" title="肝！-MistEO的博客" type="application/atom+xml">
   
@@ -171,7 +176,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>既然说好的打造技术博客，总的写点干货什么的，正好前些日子买个了新的ss服务，买完一看加密方式是<code>chacha20-ietf-poly1305</code>，再一看Shadowsocks-Qt5在Ubuntu的软件源里面最新版本只是2.9，不支持啊，退款又退不了很尴尬，于是只能自己研究一下怎么弄了，遇到了不少坑，和大家分享一下经验方法。</p>
+        <p><img src="/post_images/ss.png" alt="ss"></p>
+<p>既然说好的打造技术博客，总的写点干货什么的，正好前些日子买个了新的ss服务，买完一看加密方式是<code>chacha20-ietf-poly1305</code>，再一看Shadowsocks-Qt5在Ubuntu的软件源里面最新版本只是2.9，不支持啊，退款又退不了很尴尬，于是只能自己研究一下怎么弄了，遇到了不少坑，和大家分享一下经验方法。</p>
 <a id="more"></a>
 <h2 id="卸载旧版本Shadowsocks-Qt5"><a href="#卸载旧版本Shadowsocks-Qt5" class="headerlink" title="卸载旧版本Shadowsocks-Qt5"></a>卸载旧版本<code>Shadowsocks-Qt5</code></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get purge shadowsocks-qt5</span><br></pre></td></tr></table></figure>
 <h2 id="安装libsodium"><a href="#安装libsodium" class="headerlink" title="安装libsodium"></a>安装<code>libsodium</code></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libsodium-dev</span><br></pre></td></tr></table></figure>
@@ -184,9 +190,14 @@
 <h3 id="启动Shadowsocks-Qt5"><a href="#启动Shadowsocks-Qt5" class="headerlink" title="启动Shadowsocks-Qt5"></a>启动<code>Shadowsocks-Qt5</code></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ss-qt5</span><br></pre></td></tr></table></figure>
 <p>若提示<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ss-qt5: /usr/lib/x86_64-linux-gnu/libQt5DBus.so.5: version `Qt_5&apos; not found (required by ss-qt5)</span><br><span class="line">ss-qt5: /usr/lib/x86_64-linux-gnu/libQt5Network.so.5: version `Qt_5&apos; not found (required by ss-qt5)</span><br><span class="line">ss-qt5: /usr/lib/x86_64-linux-gnu/libQt5Gui.so.5: version `Qt_5&apos; not found (required by ss-qt5)</span><br><span class="line">ss-qt5: /usr/lib/x86_64-linux-gnu/libQt5Core.so.5: version `Qt_5.10&apos; not found (required by ss-qt5)</span><br><span class="line">ss-qt5: /usr/lib/x86_64-linux-gnu/libQt5Core.so.5: version `Qt_5&apos; not found (required by ss-qt5)</span><br><span class="line">ss-qt5: /usr/lib/x86_64-linux-gnu/libQt5Widgets.so.5: version `Qt_5&apos; not found (required by ss-qt5)</span><br></pre></td></tr></table></figure></p>
 <p>则还是环境变量的问题，导入后重新启动即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export LD_LIBRARY_PATH=/opt/Qt5.10.0/5.10.0/gcc_64/lib</span><br><span class="line">ss-qt5</span><br></pre></td></tr></table></figure></p>
-<p>启动后在<code>帮助</code>-<code>关于</code>查看一下版本号若是新版就ok了，这时手动添加一个新连接，就已经可以看到加密方式中有<code>chacha20-ietf-poly1305</code>选项了</p>
+<p>启动后在<code>帮助</code>-<code>关于</code>查看一下版本号若是新版就ok了<br><img src="/post_images/ss-qt5.png" alt="ss-qt5"></p>
+<p>这时手动添加一个新连接，就已经可以看到加密方式中有<code>chacha20-ietf-poly1305</code>选项了<br><img src="/post_images/ss-connect.png" alt="配置新连接"></p>
 <h2 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h2><p>可以写个sh，放到桌面双击启动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#/bin/bash</span><br><span class="line">export LD_LIBRARY_PATH=/opt/Qt5.10.0/5.10.0/gcc_64/lib</span><br><span class="line">ss-qt5</span><br></pre></td></tr></table></figure></p>
-<p>将<code>文件管理器</code>-<code>编辑</code>-<code>首选项</code>-<code>行为</code>-<code>可执行文本文件</code>修改为<code>打开可执行文本文件时运行它们</code>即可，别忘了给sh脚本执行权限哦</p>
+<p>将<code>文件管理器</code>-<code>编辑</code>-<code>首选项</code>-<code>行为</code>-<code>可执行文本文件</code>修改为<code>打开可执行文本文件时运行它们</code>即可，别忘了给sh脚本执行权限哦<br><img src="/post_images/file-settings.png" alt="文件行为设置"></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="https://github.com/shadowsocks/shadowsocks-qt5/issues/595#issuecomment-341869299" target="_blank" rel="noopener">Add support for chacha20-ietf-poly1305 #595</a></li>
+<li><a href="http://www.lujza.me/kali-linux-%E4%B8%8B%E5%AE%89%E8%A3%85-shadowsocks-qt5-%E5%8F%8A%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B.html" target="_blank" rel="noopener">Kali Linux 下安装 Shadowsocks-qt5 及使用教程</a></li>
+</ul>
 
       
 
