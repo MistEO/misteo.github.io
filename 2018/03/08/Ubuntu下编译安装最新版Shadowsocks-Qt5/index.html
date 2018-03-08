@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://www.misteo.top">
-  <title>Hello Hexo | 肝！-MistEO的博客</title>
+  <title>Ubuntu下源码编译安装最新版Shadowsocks-Qt5 | 肝！-MistEO的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="emmm，这大概就是第一篇博文了">
-<meta name="keywords" content="吐槽">
+  <meta name="description" content="既然说好的打造技术博客，总的写点干货什么的，正好前些日子买个了新的ss服务，买完一看加密方式是chacha20-ietf-poly1305，再一看Shadowsocks-Qt5在Ubuntu的软件源里面最新版本只是2.9，不支持啊，退款又退不了很尴尬，于是只能自己研究一下怎么弄了，遇到了不少坑，和大家分享一下经验方法。">
+<meta name="keywords" content="教程,Linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello Hexo">
-<meta property="og:url" content="http://www.misteo.top/2018/03/07/Hello-World/index.html">
+<meta property="og:title" content="Ubuntu下源码编译安装最新版Shadowsocks-Qt5">
+<meta property="og:url" content="http://www.misteo.top/2018/03/08/Ubuntu下编译安装最新版Shadowsocks-Qt5/index.html">
 <meta property="og:site_name" content="肝！-MistEO的博客">
-<meta property="og:description" content="emmm，这大概就是第一篇博文了">
+<meta property="og:description" content="既然说好的打造技术博客，总的写点干货什么的，正好前些日子买个了新的ss服务，买完一看加密方式是chacha20-ietf-poly1305，再一看Shadowsocks-Qt5在Ubuntu的软件源里面最新版本只是2.9，不支持啊，退款又退不了很尴尬，于是只能自己研究一下怎么弄了，遇到了不少坑，和大家分享一下经验方法。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-03-08T03:18:08.095Z">
+<meta property="og:updated_time" content="2018-03-08T04:51:26.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello Hexo">
-<meta name="twitter:description" content="emmm，这大概就是第一篇博文了">
+<meta name="twitter:title" content="Ubuntu下源码编译安装最新版Shadowsocks-Qt5">
+<meta name="twitter:description" content="既然说好的打造技术博客，总的写点干货什么的，正好前些日子买个了新的ss服务，买完一看加密方式是chacha20-ietf-poly1305，再一看Shadowsocks-Qt5在Ubuntu的软件源里面最新版本只是2.9，不支持啊，退款又退不了很尴尬，于是只能自己研究一下怎么弄了，遇到了不少坑，和大家分享一下经验方法。">
   
     <link rel="alternative" href="/atom.xml" title="肝！-MistEO的博客" type="application/atom+xml">
   
@@ -151,30 +151,66 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Hello-World" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Ubuntu下编译安装最新版Shadowsocks-Qt5" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Hello Hexo
+      Ubuntu下源码编译安装最新版Shadowsocks-Qt5
     </h1>
   
 
         
-        <a href="/2018/03/07/Hello-World/" class="archive-article-date">
-  	<time datetime="2018-03-07T09:23:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-07</time>
+        <a href="/2018/03/08/Ubuntu下编译安装最新版Shadowsocks-Qt5/" class="archive-article-date">
+  	<time datetime="2018-03-08T03:17:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-08</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>emmm，这大概就是第一篇博文了</p>
+        <p>既然说好的打造技术博客，总的写点干货什么的，正好前些日子买个了新的ss服务，买完一看加密方式是<code>chacha20-ietf-poly1305</code>，再一看Shadowsocks-Qt5在Ubuntu的软件源里面最新版本只是2.9，不支持啊，退款又退不了很尴尬，于是只能自己研究一下怎么弄了，遇到了不少坑，和大家分享一下经验方法。</p>
+<a id="more"></a>
+<h2 id="卸载旧版本Shadowsocks-Qt5"><a href="#卸载旧版本Shadowsocks-Qt5" class="headerlink" title="卸载旧版本Shadowsocks-Qt5"></a>卸载旧版本<code>Shadowsocks-Qt5</code></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get purge shadowsocks-qt5</span><br></pre></td></tr></table></figure>
+<h2 id="安装libsodium"><a href="#安装libsodium" class="headerlink" title="安装libsodium"></a>安装<code>libsodium</code></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libsodium-dev</span><br></pre></td></tr></table></figure>
+<h2 id="安装libbotan-2-x"><a href="#安装libbotan-2-x" class="headerlink" title="安装libbotan-2.x"></a>安装<code>libbotan-2.x</code></h2><p>下载解压编译安装，没啥好说的，可以访问<a href="https://botan.randombit.net/releases/" target="_blank" rel="noopener">Botan-Index of release</a> 获取最新本版，虽说新版本好像也没啥用XD<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">wget https://botan.randombit.net/releases/Botan-2.3.0.tgz</span><br><span class="line">tar xvf Botan-2.3.0.tgz</span><br><span class="line">cd Botan-2.3.0</span><br><span class="line">./configure.py</span><br><span class="line">make</span><br><span class="line">sudo make install</span><br><span class="line">sudo ldconfig</span><br></pre></td></tr></table></figure></p>
+<h2 id="安装libQtShadowsocks"><a href="#安装libQtShadowsocks" class="headerlink" title="安装libQtShadowsocks"></a>安装<code>libQtShadowsocks</code></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install qt5-qmake qtbase5-dev libqrencode-dev libqtshadowsocks-dev libappindicator-dev libzbar-dev libbotan1.10-dev</span><br><span class="line">git clone https://github.com/shadowsocks/libQtShadowsocks.git</span><br><span class="line">mkdir build</span><br><span class="line">cd build</span><br><span class="line">cmake ..</span><br><span class="line">make</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+<p>如果你自己原先安装过Qt，可能会提示找不到Qt目录，导入环境变量，然后重新编译安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">export LD_LIBRARY_PATH=/opt/Qt5.10.0/5.10.0/gcc_64/lib/</span><br><span class="line">rm -rf *    #删除build文件夹中文件</span><br><span class="line">cmake ..</span><br><span class="line">make</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure></p>
+<h3 id="安装Shadowsocks-Qt5"><a href="#安装Shadowsocks-Qt5" class="headerlink" title="安装Shadowsocks-Qt5"></a>安装<code>Shadowsocks-Qt5</code></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install qt5-qmake qtbase5-dev libqrencode-dev libqtshadowsocks-dev libappindicator-dev libzbar-dev libbotan1.10-dev</span><br><span class="line">git clone https://github.com/shadowsocks/shadowsocks-qt5.git</span><br><span class="line">cd shadowsocks-qt5</span><br><span class="line">mkdir build</span><br><span class="line">cd build</span><br><span class="line">cmake ..</span><br><span class="line">make</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+<p>如果提示找不到Qt目录，编辑<code>CMakeLists.txt</code>，加入一行并保存<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set(CMAKE_PREFIX_PATH &quot;/opt/Qt5.10.0/5.10.0/gcc_64&quot;)</span><br></pre></td></tr></table></figure></p>
+<p>然后重新编译安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rm -rf *    #删除build文件夹中文件</span><br><span class="line">cmake ..</span><br><span class="line">make</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure></p>
+<h3 id="启动Shadowsocks-Qt5"><a href="#启动Shadowsocks-Qt5" class="headerlink" title="启动Shadowsocks-Qt5"></a>启动<code>Shadowsocks-Qt5</code></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ss-qt5</span><br></pre></td></tr></table></figure>
+<p>若提示<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ss-qt5: /usr/lib/x86_64-linux-gnu/libQt5DBus.so.5: version `Qt_5&apos; not found (required by ss-qt5)</span><br><span class="line">ss-qt5: /usr/lib/x86_64-linux-gnu/libQt5Network.so.5: version `Qt_5&apos; not found (required by ss-qt5)</span><br><span class="line">ss-qt5: /usr/lib/x86_64-linux-gnu/libQt5Gui.so.5: version `Qt_5&apos; not found (required by ss-qt5)</span><br><span class="line">ss-qt5: /usr/lib/x86_64-linux-gnu/libQt5Core.so.5: version `Qt_5.10&apos; not found (required by ss-qt5)</span><br><span class="line">ss-qt5: /usr/lib/x86_64-linux-gnu/libQt5Core.so.5: version `Qt_5&apos; not found (required by ss-qt5)</span><br><span class="line">ss-qt5: /usr/lib/x86_64-linux-gnu/libQt5Widgets.so.5: version `Qt_5&apos; not found (required by ss-qt5)</span><br></pre></td></tr></table></figure></p>
+<p>则还是环境变量的问题，导入后重新启动即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export LD_LIBRARY_PATH=/opt/Qt5.10.0/5.10.0/gcc_64/lib</span><br><span class="line">ss-qt5</span><br></pre></td></tr></table></figure></p>
+<p>启动后在<code>帮助</code>-<code>关于</code>查看一下版本号若是新版就ok了，这时手动添加一个新连接，就已经可以看到加密方式中有<code>chacha20-ietf-poly1305</code>选项了</p>
+<h2 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h2><p>可以写个sh，放到桌面双击启动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#/bin/bash</span><br><span class="line">export LD_LIBRARY_PATH=/opt/Qt5.10.0/5.10.0/gcc_64/lib</span><br><span class="line">ss-qt5</span><br></pre></td></tr></table></figure></p>
+<p>将<code>文件管理器</code>-<code>编辑</code>-<code>首选项</code>-<code>行为</code>-<code>可执行文本文件</code>修改为<code>打开可执行文本文件时运行它们</code>即可，别忘了给sh脚本执行权限哦</p>
 
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -185,7 +221,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">吐槽</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">教程</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
         		</li>
       		
 		</ul>
@@ -241,7 +281,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://www.misteo.top/2018/03/07/Hello-World/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://www.misteo.top/2018/03/08/Ubuntu下编译安装最新版Shadowsocks-Qt5/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -255,15 +295,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/03/08/Ubuntu下编译安装最新版Shadowsocks-Qt5/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Ubuntu下源码编译安装最新版Shadowsocks-Qt5
-        
-      </div>
-    </a>
   
+    <a href="/2018/03/07/Hello-World/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hello Hexo</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
