@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.misteo.top/"/>
-  <updated>2018-03-15T16:43:37.952Z</updated>
+  <updated>2018-03-18T16:17:13.767Z</updated>
   <id>http://www.misteo.top/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>记Ubuntu下一次失败的显卡驱动安装</title>
+    <link href="http://www.misteo.top/2018/03/18/%E8%AE%B0Ubuntu%E4%B8%8B%E4%B8%80%E6%AC%A1%E5%A4%B1%E8%B4%A5%E7%9A%84%E6%98%BE%E5%8D%A1%E9%A9%B1%E5%8A%A8%E5%AE%89%E8%A3%85/"/>
+    <id>http://www.misteo.top/2018/03/18/记Ubuntu下一次失败的显卡驱动安装/</id>
+    <published>2018-03-18T15:57:12.000Z</published>
+    <updated>2018-03-18T16:17:13.767Z</updated>
+    
+    <content type="html"><![CDATA[<p>先上结论：<strong>Ubuntu 16.04 x64下，目前没有i3-8100的核显UHD630的驱动</strong>，所以别想了，加张独显吧！</p><p>从头说起，今天把办公室的CPU和主板换了，从i3-7100升级到了i3-8100，想着Linux的驱动是一起上，应该是换完插上硬盘就能用的，结果正常开始，但是分辨率始终不对。只有1024*768一个选项，办公室的电脑有两个屏幕，也一直只能镜像显示不能分屏。</p><p>这还不简单改个分辨率不就得了，直接xrandr命令修改分辨率，却提示<code>failed to get size of gamma for output default</code>，查了很多教程，依旧无解。</p><p>点击上方状态栏上<code>关于计算机</code>，图形处理器没能正确识别（具体是什么不记得了，反正不是UHD630），遂想到驱动没有正确安装。Intel的核显也不是私有驱动，在<code>设置</code>-<code>软件更新</code>中找不到可用驱动，按照网上教程安装了<code>intel graphics update tool</code>，<em>题外话，这货真是有毒，下载奇慢无比，哪怕挂代理也经常下到一半断掉</em>，多次尝试最后提示成功，但设置仍没有中分辨率的选项，xrandr依旧报错。然后又反复卸载重装，装新版本（测试过最新版为2.0.3），反复重启等等，无果。</p><p>折腾了一晚上，万般无奈只能准备重装系统了，烧好了ubuntu的镜像，启动的时候图像想到了什么，点了<code>try ubuntu without installing</code>，果然进去分辨率也不对，只有1024*768。找同时电脑试了一下，试用ubuntu进去分辨率是正确的，ohshit还是驱动问题啊，压根就没有可以用的驱动。翻出了压箱底的一张GTS450，插上主板接上供电开机。分辨率一切正常，原先i3-7100的UHD630存在的次屏幕不能自动适配分辨率需要手动xrandr的问题也解决了。。虽说换个独显性能可能要降一大半，不过毕竟不跑GPU运算，也不用这台电脑玩游戏，无所谓啦=。=</p><p>说到底还是Intel对Linux的支持不够友好，浪费了一晚上时间就很气吧- -</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;先上结论：&lt;strong&gt;Ubuntu 16.04 x64下，目前没有i3-8100的核显UHD630的驱动&lt;/strong&gt;，所以别想了，加张独显吧！&lt;/p&gt;
+&lt;p&gt;从头说起，今天把办公室的CPU和主板换了，从i3-7100升级到了i3-8100，想着Linux的驱动是一
+      
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="http://www.misteo.top/tags/Linux/"/>
+    
+      <category term="吐槽" scheme="http://www.misteo.top/tags/%E5%90%90%E6%A7%BD/"/>
+    
+  </entry>
   
   <entry>
     <title>Ubuntu下源码编译安装最新版Shadowsocks-Qt5</title>
