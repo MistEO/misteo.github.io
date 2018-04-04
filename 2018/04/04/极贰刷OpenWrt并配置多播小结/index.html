@@ -43,7 +43,7 @@
     
     <title>
         
-            tags | 
+            HC5761刷OpenWrt并配置多播小结 | 
         
         肝！
     </title>
@@ -53,8 +53,8 @@
     <link rel="icon" href="/img/myfavicon.png">
 
     <meta name="format-detection" content="telephone=no"/>
-    <meta name="description" itemprop="description" content="MistEO的博客">
-    <meta name="keywords" content="">
+    <meta name="description" itemprop="description" content="这几天把公司宿舍的网络好好的折腾了一下，从平均10Mbps最高20Mbps勉强提升到了稳定30Mbps，总结一下心得">
+    <meta name="keywords" content=",路由器,吐槽">
     <meta name="theme-color" content="#0097A7">
 
     <!-- Disable Fucking Bloody Baidu Tranformation -->
@@ -81,6 +81,9 @@
         <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?MKetZV3cUTfDxvMffaOezg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
 
         
+            
+                <style id="prettify_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_css","/css/prettify.min.css?zp8STOU9v89XWFEnN+6YmQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+                <style id="prettify_theme"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_theme","/css/prettify/github-v2.min.css?AfzKxt++K+/lhZBlSjnxwg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
             
         
 
@@ -217,7 +220,7 @@
     <!-- WebAPP Icons -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="application-name" content="肝！">
-    <meta name="msapplication-starturl" content="http://www.misteo.top/tags/">
+    <meta name="msapplication-starturl" content="http://www.misteo.top/2018/04/04/极贰刷OpenWrt并配置多播小结/">
     <meta name="msapplication-navbutton-color" content="#0097A7">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="肝！">
@@ -232,13 +235,16 @@
     
 
     <!-- The Open Graph protocol -->
-    <meta property="og:url" content="http://www.misteo.top/tags/">
+    <meta property="og:url" content="http://www.misteo.top/2018/04/04/极贰刷OpenWrt并配置多播小结/">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="tags | 肝！">
+    <meta property="og:title" content="HC5761刷OpenWrt并配置多播小结 | 肝！">
     <meta property="og:image" content="/img/myfavicon.png">
-    <meta property="og:description" content="MistEO的博客">
-    
+    <meta property="og:description" content="这几天把公司宿舍的网络好好的折腾了一下，从平均10Mbps最高20Mbps勉强提升到了稳定30Mbps，总结一下心得">
+    <meta property="og:article:tag" content="路由器"> <meta property="og:article:tag" content="吐槽"> 
 
+    
+        <meta property="article:published_time" content="Wed Apr 04 2018 10:55:17 GMT+0800">
+        <meta property="article:modified_time" content="Wed Apr 04 2018 14:46:09 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -246,13 +252,43 @@
 
     <!-- Add canonical link for SEO -->
     
-        <link rel="canonical" href="http://www.misteo.top/tags/index.html" />
+        <link rel="canonical" href="http://www.misteo.top/2018/04/04/极贰刷OpenWrt并配置多播小结/index.html" />
     
 
     <!-- Structured-data for SEO -->
     
         
 
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "http://www.misteo.top/2018/04/04/极贰刷OpenWrt并配置多播小结/index.html",
+    "headline": "HC5761刷OpenWrt并配置多播小结",
+    "datePublished": "Wed Apr 04 2018 10:55:17 GMT+0800",
+    "dateModified": "Wed Apr 04 2018 14:46:09 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "MistEO",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.jpeg"
+        },
+        "description": "Hi, Nice to meet you"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "肝！",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/myfavicon.png"
+        }
+    },
+    "keywords": ",路由器,吐槽",
+    "description": "这几天把公司宿舍的网络好好的折腾了一下，从平均10Mbps最高20Mbps勉强提升到了稳定30Mbps，总结一下心得",
+}
+</script>
 
 
     
@@ -296,60 +332,273 @@
 
                     <!-- Post TOC -->
 
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#获取Root"><span class="post-toc-number">1.</span> <span class="post-toc-text">获取Root</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#刷机"><span class="post-toc-number">2.</span> <span class="post-toc-text">刷机</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#连上极路由"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">连上极路由</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#刷入Bootloader"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">刷入Bootloader</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#刷入固件"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">刷入固件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#多播设置"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">多播设置</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#相关链接"><span class="post-toc-number">3.</span> <span class="post-toc-text">相关链接</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Bootloader"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">Bootloader</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Rom"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">Rom</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考资料"><span class="post-toc-number">4.</span> <span class="post-toc-text">参考资料</span></a></li></ol>
+    </ul>
+    
+
+
+
 
 <!-- Layouts -->
 
-    <!-- Tags Cloud -->
-    <style>
-    #bottom{
-        position: relative;
-    }
+    <!-- Post Module -->
+    <div class="material-post_container">
 
-    @media screen and (max-width: 480px) {
-        .material-tagscloud{
-            margin: 6em 2em 0;
-        }
-    }
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
 
-    .material-tagscloud a{
-        text-decoration:none;
-        padding: 1px 9px;
-        margin: 9px 1px;
-        line-height: 40px;
-        white-space: nowrap;
-        transition: .6s;
-        opacity: .85;
-    }
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
 
-    .material-tagscloud a:hover{
-        transition: .6s;
-        opacity: 1;
-        background: #FAFAFA;
-        box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
-    }
-</style>
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
 
-<div class=" material-tagscloud">
-    <div class="material-post mdl-grid">
-        <a href="/tags/Linux/" style="font-size: 25.5px; color: #4b4b4b">Linux</a> <a href="/tags/吐槽/" style="font-size: 35px; color: #212121">吐槽</a> <a href="/tags/教程/" style="font-size: 16px; color: #757575">教程</a> <a href="/tags/路由器/" style="font-size: 16px; color: #757575">路由器</a>
+        
+    
+            <p class="article-headline-p">
+                HC5761刷OpenWrt并配置多播小结
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.jpeg" width="44px" height="44px" alt="Author Avatar"/>
     </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>MistEO</strong>
+        <span>4月 04, 2018</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/吐槽/">吐槽</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/路由器/">路由器</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=HC5761刷OpenWrt并配置多播小结&url=http://www.misteo.top/2018/04/04/极贰刷OpenWrt并配置多播小结/index.html&pic=http://www.misteo.top/img/myfavicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+
+    <!-- Share Facebook -->
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://www.misteo.top/2018/04/04/极贰刷OpenWrt并配置多播小结/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=肝！&title=HC5761刷OpenWrt并配置多播小结&summary=MistEO的博客&pics=http://www.misteo.top/img/myfavicon.png&url=http://www.misteo.top/2018/04/04/极贰刷OpenWrt并配置多播小结/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 QQ
+            </li>
+        </a>
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>这几天把公司宿舍的网络好好的折腾了一下，从平均10Mbps最高20Mbps勉强提升到了稳定30Mbps，总结一下心得</p>
+<a id="more"></a>
+<h2 id="获取Root"><a href="#获取Root" class="headerlink" title="获取Root"></a>获取Root</h2><p>云插件中安装<code>开发中模式</code>，好像还要关联微信什么的，GUI操作应该不困难，感觉没啥好说的，<del>其实是因为好久以前弄的具体的我不记得了</del></p>
+<h2 id="刷机"><a href="#刷机" class="headerlink" title="刷机"></a>刷机</h2><p>注意以下命令行都是基于极贰（<code>HC5761</code>)，其他路由器同理，但需要改一下链接下载符合自己机型的文件不要直接复制</p>
+<h3 id="连上极路由"><a href="#连上极路由" class="headerlink" title="连上极路由"></a>连上极路由</h3><pre><code class="bash">ssh -p 1022 root@192.168.1.1
+</code></pre>
+<p>密码就是路由器的管理密码</p>
+<h3 id="刷入Bootloader"><a href="#刷入Bootloader" class="headerlink" title="刷入Bootloader"></a>刷入Bootloader</h3><p>这里我们刷入<code>Breed</code>，一个很强大的Bootloader，想刷入其他的可以下载<a href="#相关链接">相关链接</a>中的其他文件</p>
+<pre><code class="bash">cd /tmp
+wget https://breed.hackpascal.net/breed-mt7620-hiwifi-hc5761.bin
+mtd write breed-mt7620-hiwifi-hc5761.bin u-boot
+</code></pre>
+<h3 id="刷入固件"><a href="#刷入固件" class="headerlink" title="刷入固件"></a>刷入固件</h3><p>这里我们刷入<code>OpenWrt</code>，想刷入其他的可以下载<a href="#相关链接">相关链接</a>中的其他文件</p>
+<pre><code class="bash">wget http://rssn.cn/roms/openwrt-ramips-mt7620a-hc5761-squashfs-sysupgrade.bin
+sysupgrade -F -n openwrt-ramips-mt7620a-hc5761-squashfs-sysupgrade.bin
+</code></pre>
+<p>好像是只有<code>sysupgrade.bin</code>的固件可以使用这个命令行刷入，其他的固件可以进入<code>Bootloader</code>刷，具体的步骤为</p>
+<ol>
+<li>断电关机</li>
+<li>长按reset不放，同时通电，约5秒后松手</li>
+<li>进入<a href="http://192.168.1.1" target="_blank" rel="noopener">http://192.168.1.1</a></li>
+<li>选择<code>固件更新</code>-<code>固件</code>-上传固件并更新</li>
+</ol>
+<p>等待完成后重启，固件就刷好了</p>
+<h3 id="多播设置"><a href="#多播设置" class="headerlink" title="多播设置"></a>多播设置</h3><p>待续。。。</p>
+<h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><h3 id="Bootloader"><a href="#Bootloader" class="headerlink" title="Bootloader"></a>Bootloader</h3><ul>
+<li><a href="https://breed.hackpascal.net/" target="_blank" rel="noopener">Breed</a></li>
+<li><a href="http://rssn.cn/roms/uboot/" target="_blank" rel="noopener">u-boot</a></li>
+</ul>
+<h3 id="Rom"><a href="#Rom" class="headerlink" title="Rom"></a>Rom</h3><ul>
+<li><a href="http://rssn.cn/roms/" target="_blank" rel="noopener">OpenWrt</a></li>
+</ul>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="https://www.jianshu.com/p/196a43b79c24" target="_blank" rel="noopener">极路由1、1s等机型刷OpenWrt–成为真正的极客- 简书</a></li>
+<li><a href="http://www.right.com.cn/forum/thread-161906-1-1.html" target="_blank" rel="noopener">AR/QCA/MTK Breed，功能强大的多线程 Bootloader ,恩山无线论坛</a></li>
+<li><a href="https://blog.csdn.net/lvshaorong/article/details/70568791" target="_blank" rel="noopener">OpenWrt路由器macvlan单线多拨的方法 - CSDN博客</a></li>
+<li><a href="https://blog.csdn.net/lvshaorong/article/details/61916525" target="_blank" rel="noopener">OpwnWrt 路由器MWAN3多线多拨实现方法 - CSDN博客</a></li>
+</ul>
+
+        
+    
+
+    
 </div>
 
 
-<script type="text/ls-javascript" id="page-tagcloud-script">
-    var adjustFooter = function() {
-        if( ($('#bottom').offset().top + $('#bottom').outerHeight() ) < $(window).height() ) {
-            var footerBottom = $(window).height() - $('#bottom').outerHeight() - $('#bottom').offset().top;
-            $('#bottom').css('bottom', '-' + footerBottom + 'px');
-        }
-    };
+                
 
-    $(document).ready(function() {
-        adjustFooter();
-    });
+                <!-- Post Comments -->
+                
+                    
+    <!-- 使用 gitcoment -->
+<div id="gitment-comment">
+    <!-- Gitment 评论框 -->
+<div id="container"></div>
+</div>
+<style>
+    #gitment-comment {
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+        id: 'Wed Apr 04 2018 10:55:17 GMT+0800', // 可选。默认为 location.href
+        owner: 'MistEO',
+        repo: 'misteo.github.io',
+        oauth: {
+            client_id: '9daf0aa1bbd84937927e',
+            client_secret: 'afc59e71afc8bb1ab612674e377d3e56183c04b9',
+        },
+    })
+    gitment.render('container')
 </script>
 
+                
+            </div>
 
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2018/03/18/记Ubuntu下一次失败的显卡驱动安装/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
 
 
 
@@ -539,6 +788,14 @@ It will not impact the appearance and can give developers a lot of support :)
                     
 
                     
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
 
                     <!--Footer-->
 <footer class="mdl-mini-footer" id="bottom">
@@ -687,6 +944,10 @@ It will not impact the appearance and can give developers a lot of support :)
 <!-- Import prettify js  -->
 
     
+        
+            <script>lsloader.load("prettify_js","/js/prettify.min.js?WN07fivHQSMKWy7BmHBB6w==", true)</script>
+        
+    
 
 
 
@@ -699,6 +960,11 @@ It will not impact the appearance and can give developers a lot of support :)
     });
 
     
+        
+            $(function() {
+                $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+                prettyPrint();
+                })
         
     
     
