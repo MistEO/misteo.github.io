@@ -53,7 +53,7 @@
     <link rel="icon" href="/img/myfavicon.png">
 
     <meta name="format-detection" content="telephone=no"/>
-    <meta name="description" itemprop="description" content="概要困扰了我很久的一个问题了，QML中某些动态列表无法访问子组件，老规矩先上结论，通过contentItem.children即可访问
+    <meta name="description" itemprop="description" content="老规矩先上结论，通过contentItem.children访问即可
 var obj = listview.contentItem.children[index]
 ">
     <meta name="keywords" content=",教程,Qt,QML">
@@ -241,14 +241,14 @@ var obj = listview.contentItem.children[index]
     <meta property="og:type" content="blog">
     <meta property="og:title" content="QML中ListView访问子组件 | 肝！">
     <meta property="og:image" content="/img/myfavicon.png">
-    <meta property="og:description" content="概要困扰了我很久的一个问题了，QML中某些动态列表无法访问子组件，老规矩先上结论，通过contentItem.children即可访问
+    <meta property="og:description" content="老规矩先上结论，通过contentItem.children访问即可
 var obj = listview.contentItem.children[index]
 ">
     <meta property="og:article:tag" content="教程"> <meta property="og:article:tag" content="Qt"> <meta property="og:article:tag" content="QML"> 
 
     
         <meta property="article:published_time" content="Tue Jun 12 2018 17:56:59 GMT+0800">
-        <meta property="article:modified_time" content="Tue Jun 12 2018 18:06:55 GMT+0800">
+        <meta property="article:modified_time" content="Tue Jun 12 2018 18:16:55 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -271,7 +271,7 @@ var obj = listview.contentItem.children[index]
     "mainEntityOfPage": "http://www.misteo.top/2018/06/12/QML中ListView访问子组件/index.html",
     "headline": "QML中ListView访问子组件",
     "datePublished": "Tue Jun 12 2018 17:56:59 GMT+0800",
-    "dateModified": "Tue Jun 12 2018 18:06:55 GMT+0800",
+    "dateModified": "Tue Jun 12 2018 18:16:55 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "MistEO",
@@ -290,7 +290,7 @@ var obj = listview.contentItem.children[index]
         }
     },
     "keywords": ",教程,Qt,QML",
-    "description": "概要困扰了我很久的一个问题了，QML中某些动态列表无法访问子组件，老规矩先上结论，通过contentItem.children即可访问
+    "description": "老规矩先上结论，通过contentItem.children访问即可
 var obj = listview.contentItem.children[index]
 ",
 }
@@ -365,7 +365,7 @@ var obj = listview.contentItem.children[index]
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#概要"><span class="post-toc-number">1.</span> <span class="post-toc-text">概要</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#举个简单的例子"><span class="post-toc-number">2.</span> <span class="post-toc-text">举个简单的例子</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#要注意的一些问题"><span class="post-toc-number">3.</span> <span class="post-toc-text">要注意的一些问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#spacing带来的问题"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">spacing带来的问题</span></a></li></ol></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#举个简单的例子"><span class="post-toc-number">2.</span> <span class="post-toc-text">举个简单的例子</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#要注意的一些问题"><span class="post-toc-number">3.</span> <span class="post-toc-text">要注意的一些问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#spacing带来的问题"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">spacing带来的问题</span></a></li></ol></li></ol>
     </ul>
     
 
@@ -503,10 +503,13 @@ var obj = listview.contentItem.children[index]
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><p>困扰了我很久的一个问题了，QML中某些动态列表无法访问子组件，老规矩先上结论，通过<code>contentItem.children</code>即可访问</p>
+        <p>老规矩先上结论，通过<code>contentItem.children</code>访问即可</p>
 <pre><code class="js">var obj = listview.contentItem.children[index]
 </code></pre>
 <a id="more"></a>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>写QML项目难免经常要用到<a href="https://doc-snapshots.qt.io/qt5-5.9/qml-qtquick-listview.html" target="_blank" rel="noopener"><code>ListView</code></a>，可是<code>ListView</code>却不像<code>Repeater</code>一样拥有<code>itemAt(index)</code>这样的方法，只有<code>itemAt(real x, real y)</code>，需要通过坐标值来得到子组件，而作为可以滑动的列表，坐标还得实时计算，这也太蠢了，我明明只是想遍历所有子组件而已！查了很多资料终于找到了答案，使用其基类<code>QQuickItem</code>里的方法即可，而不是<code>ListView</code>里面的，即上文摘要中提到的<code>contentItem</code></p>
+<pre><code class="js">var obj = listview.contentItem.children[index]
+</code></pre>
 <h2 id="举个简单的例子"><a href="#举个简单的例子" class="headerlink" title="举个简单的例子"></a>举个简单的例子</h2><pre><code class="js">ListView {
     id: listview
     model: 10
