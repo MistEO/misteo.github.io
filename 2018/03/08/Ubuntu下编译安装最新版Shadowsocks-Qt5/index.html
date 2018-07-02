@@ -244,7 +244,7 @@
 
     
         <meta property="article:published_time" content="Thu Mar 08 2018 11:17:35 GMT+0800">
-        <meta property="article:modified_time" content="Thu May 17 2018 17:27:56 GMT+0800">
+        <meta property="article:modified_time" content="Mon Jul 02 2018 18:08:21 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -267,7 +267,7 @@
     "mainEntityOfPage": "http://www.misteo.top/2018/03/08/Ubuntu下编译安装最新版Shadowsocks-Qt5/index.html",
     "headline": "Ubuntu下源码编译安装最新版Shadowsocks-Qt5",
     "datePublished": "Thu Mar 08 2018 11:17:35 GMT+0800",
-    "dateModified": "Thu May 17 2018 17:27:56 GMT+0800",
+    "dateModified": "Mon Jul 02 2018 18:08:21 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "MistEO",
@@ -510,6 +510,7 @@ cd build
 cmake ..
 make
 sudo make install
+sudo ldconfig
 </code></pre>
 <p>如果软件源中没有libqtshadowsocks-dev，可以使用pip安装</p>
 <pre><code class="bash">sudo apt-get install python-pip
@@ -521,6 +522,7 @@ rm -rf *    #删除build文件夹中文件
 cmake ..
 make
 sudo make install
+sudo ldconfig
 </code></pre>
 <h2 id="安装Shadowsocks-Qt5"><a href="#安装Shadowsocks-Qt5" class="headerlink" title="安装Shadowsocks-Qt5"></a>安装<code>Shadowsocks-Qt5</code></h2><pre><code class="bash">sudo apt-get install qt5-qmake qtbase5-dev libqrencode-dev libqtshadowsocks-dev libappindicator-dev libzbar-dev libbotan1.10-dev
 git clone https://github.com/shadowsocks/shadowsocks-qt5.git
@@ -530,6 +532,7 @@ cd build
 cmake ..
 make
 sudo make install
+sudo ldconfig
 </code></pre>
 <p>如果提示找不到Qt目录，编辑<code>CMakeLists.txt</code>，加入一行并保存</p>
 <pre><code class="cmake">set(CMAKE_PREFIX_PATH &quot;/opt/Qt5.10.0/5.10.0/gcc_64&quot;)
@@ -539,6 +542,7 @@ sudo make install
 cmake ..
 make
 sudo make install
+sudo ldconfig
 </code></pre>
 <h2 id="启动ss-qt5"><a href="#启动ss-qt5" class="headerlink" title="启动ss-qt5"></a>启动<code>ss-qt5</code></h2><p>直接启动即可</p>
 <pre><code class="bash">ss-qt5
