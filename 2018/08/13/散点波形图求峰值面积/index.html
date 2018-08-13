@@ -43,7 +43,7 @@
     
     <title>
         
-            标签: 教程 | 
+            散点波形图求峰值面积比 | 
         
         肝！
     </title>
@@ -53,8 +53,8 @@
     <link rel="icon" href="/img/myfavicon.png">
 
     <meta name="format-detection" content="telephone=no"/>
-    <meta name="description" itemprop="description" content="MistEO的博客">
-    <meta name="keywords" content="">
+    <meta name="description" itemprop="description" content="前段时间接到了个需求，数据是几千个散点，绘制出来波形图，有多个波峰，需求是求出各个波峰与第一个波峰的面积比值。乍一看需求有点难以实现，其实细化成各个模块之后也算比较简单，在这里总结一下经验方法">
+    <meta name="keywords" content=",教程,算法,c++">
     <meta name="theme-color" content="#0097A7">
 
     <!-- Disable Fucking Bloody Baidu Tranformation -->
@@ -81,6 +81,9 @@
         <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?MKetZV3cUTfDxvMffaOezg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
 
         
+            
+                <style id="prettify_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_css","/css/prettify.min.css?zp8STOU9v89XWFEnN+6YmQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+                <style id="prettify_theme"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_theme","/css/prettify/github-v2.min.css?AfzKxt++K+/lhZBlSjnxwg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
             
         
 
@@ -217,7 +220,7 @@
     <!-- WebAPP Icons -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="application-name" content="肝！">
-    <meta name="msapplication-starturl" content="http://www.misteo.top/tags/教程/">
+    <meta name="msapplication-starturl" content="http://www.misteo.top/2018/08/13/散点波形图求峰值面积/">
     <meta name="msapplication-navbutton-color" content="#0097A7">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="肝！">
@@ -232,13 +235,16 @@
     
 
     <!-- The Open Graph protocol -->
-    <meta property="og:url" content="http://www.misteo.top/tags/教程/">
+    <meta property="og:url" content="http://www.misteo.top/2018/08/13/散点波形图求峰值面积/">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="标签: 教程 | 肝！">
+    <meta property="og:title" content="散点波形图求峰值面积比 | 肝！">
     <meta property="og:image" content="/img/myfavicon.png">
-    <meta property="og:description" content="MistEO的博客">
-    
+    <meta property="og:description" content="前段时间接到了个需求，数据是几千个散点，绘制出来波形图，有多个波峰，需求是求出各个波峰与第一个波峰的面积比值。乍一看需求有点难以实现，其实细化成各个模块之后也算比较简单，在这里总结一下经验方法">
+    <meta property="og:article:tag" content="教程"> <meta property="og:article:tag" content="算法"> <meta property="og:article:tag" content="c++"> 
 
+    
+        <meta property="article:published_time" content="Mon Aug 13 2018 17:17:05 GMT+0800">
+        <meta property="article:modified_time" content="Mon Aug 13 2018 17:59:11 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -246,13 +252,43 @@
 
     <!-- Add canonical link for SEO -->
     
-        <link rel="canonical" href="http://www.misteo.top/tags/教程/index.html" />
+        <link rel="canonical" href="http://www.misteo.top/2018/08/13/散点波形图求峰值面积/index.html" />
     
 
     <!-- Structured-data for SEO -->
     
         
 
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "http://www.misteo.top/2018/08/13/散点波形图求峰值面积/index.html",
+    "headline": "散点波形图求峰值面积比",
+    "datePublished": "Mon Aug 13 2018 17:17:05 GMT+0800",
+    "dateModified": "Mon Aug 13 2018 17:59:11 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "MistEO",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.jpeg"
+        },
+        "description": "Hi, Nice to meet you"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "肝！",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/myfavicon.png"
+        }
+    },
+    "keywords": ",教程,算法,c++",
+    "description": "前段时间接到了个需求，数据是几千个散点，绘制出来波形图，有多个波峰，需求是求出各个波峰与第一个波峰的面积比值。乍一看需求有点难以实现，其实细化成各个模块之后也算比较简单，在这里总结一下经验方法",
+}
+</script>
 
 
     
@@ -294,259 +330,360 @@
                         </button>
                     
 
-                    <!-- Index Module -->
-<div class="material-index mdl-grid">
-    
-    <div class="locate-thumbnail-symbol"></div>
+                    <!-- Post TOC -->
 
-    <!-- Pin on top -->
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#概要"><span class="post-toc-number">1.</span> <span class="post-toc-text">概要</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#散点平滑"><span class="post-toc-number">2.</span> <span class="post-toc-text">散点平滑</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#求散点导"><span class="post-toc-number">3.</span> <span class="post-toc-text">求散点导</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#散点导平滑"><span class="post-toc-number">4.</span> <span class="post-toc-text">散点导平滑</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#求极值"><span class="post-toc-number">5.</span> <span class="post-toc-text">求极值</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#积分求面积"><span class="post-toc-number">6.</span> <span class="post-toc-text">积分求面积</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#调用"><span class="post-toc-number">7.</span> <span class="post-toc-text">调用</span></a></li></ol>
+    </ul>
     
 
-    <!-- Normal Post -->
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
     
         <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50 lazy" data-original="/post_images/crest_1.png">
+        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(/post_images/crest_1.png)">
+    
+            <p class="article-headline-p">
+                散点波形图求峰值面积比
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.jpeg" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>MistEO</strong>
+        <span>8月 13, 2018</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
     
 
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2018/08/13/散点波形图求峰值面积/">散点波形图求峰值面积比</a></p>
-    </div>
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/c/">c++</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/教程/">教程</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/算法/">算法</a>
+    </ul>
+    
 
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            前段时间接到了个需求，数据是几千个散点，绘制出来波形图，有多个波峰，需求是求出各个波峰与第一个波峰的面积比值。乍一看需求有点难以实现，其实细化成各个模块之后也算比较简单，在这里总结一下经验方法
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2018/08/13/散点波形图求峰值面积/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.jpeg" width="44px" height="44px" alt="MistEO's avatar">
-            </div>
-            <div>
-                <strong>MistEO</strong>
-                <span>8月 13, 2018</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-          
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
 
-            
+    
 
-            
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=散点波形图求峰值面积比&url=http://www.misteo.top/2018/08/13/散点波形图求峰值面积/index.html&pic=http://www.misteo.top/img/myfavicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
 
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
+    <!-- Share Twitter -->
+    
+
+    <!-- Share Facebook -->
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://www.misteo.top/2018/08/13/散点波形图求峰值面积/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=肝！&title=散点波形图求峰值面积比&summary=MistEO的博客&pics=http://www.misteo.top/img/myfavicon.png&url=http://www.misteo.top/2018/08/13/散点波形图求峰值面积/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 QQ
+            </li>
+        </a>
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
 </div>
 
-            
-            
-        
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2018/06/12/QML中ListView访问子组件/">QML中ListView访问子组件</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            老规矩先上结论，通过contentItem.children访问即可
-var obj = listview.contentItem.children[index]
-
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2018/06/12/QML中ListView访问子组件/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.jpeg" width="44px" height="44px" alt="MistEO's avatar">
-            </div>
-            <div>
-                <strong>MistEO</strong>
-                <span>6月 12, 2018</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-          
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-        
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2018/04/04/极贰刷OpenWrt并配置多播小结/">HC5761刷OpenWrt并配置多播小结</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            这几天把公司宿舍的网络好好的折腾了一下，从平均10Mbps最高20Mbps勉强提升到了稳定30Mbps，总结一下心得
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2018/04/04/极贰刷OpenWrt并配置多播小结/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.jpeg" width="44px" height="44px" alt="MistEO's avatar">
-            </div>
-            <div>
-                <strong>MistEO</strong>
-                <span>4月 04, 2018</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-          
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
-    <!-- Post Thumbnail -->
-    
-        <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50 lazy" data-original="/post_images/ss.png">
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2018/03/08/Ubuntu下编译安装最新版Shadowsocks-Qt5/">Ubuntu下源码编译安装最新版Shadowsocks-Qt5</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            既然说好的打造技术博客，总得写点干货什么的，正好前些日子买个了新的ss服务，买完才注意到加密方式是chacha20-ietf-poly1305，再一看Shadowsocks-Qt5在Ubuntu的软件源里面最新版本只是2.9，不支持啊，于是只能自己研究一下怎么弄了，遇到了不少坑，和大家分享一下经验方法。
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2018/03/08/Ubuntu下编译安装最新版Shadowsocks-Qt5/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                <img src="/img/avatar.jpeg" width="44px" height="44px" alt="MistEO's avatar">
-            </div>
-            <div>
-                <strong>MistEO</strong>
-                <span>3月 08, 2018</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-          
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-    
-
-    
-
-    
-        <script type="text/ls-javascript" id="thumbnail-script">
-    var randomNum;
-
-    var locatePost = $('.locate-thumbnail-symbol').next();
-    for(var i = 0; i < 10; i++) {
-        randomNum = Math.floor(Math.random() * 19 + 1);
-
-        locatePost.children('.post_thumbnail-random').attr('id', 'random_thumbnail-'+randomNum);
-        locatePost.children('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
-    $('.post_thumbnail-random').addClass('lazy');
-
-        locatePost = locatePost.next();
+        <p>前段时间接到了个需求，数据是几千个散点，绘制出来波形图，有多个波峰，需求是求出各个波峰与第一个波峰的面积比值。乍一看需求有点难以实现，其实细化成各个模块之后也算比较简单，在这里总结一下经验方法</p>
+<a id="more"></a>
+<p><img src="/post_images/crest_1.png" alt="数据绘制"></p>
+<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><p>首先分清要做什么，既然是散点，那肯定需要平滑。得出了平滑曲线之后，怎么求波峰？当然是取极大值，就是散点求导，求完导可能需要对导函数散点再次平滑。求面积就积分，至于积分取值区间，就是前一个极小值到后一个极小值的差。（我们的需求比较特殊，要取值区间固定大小，所以在这里略有不同），总结一下：</p>
+<ol>
+<li>散点平滑</li>
+<li>求散点导</li>
+<li>散点导平滑</li>
+<li>求极值</li>
+<li>积分求面积</li>
+</ol>
+<p>下面逐条分析</p>
+<h2 id="散点平滑"><a href="#散点平滑" class="headerlink" title="散点平滑"></a>散点平滑</h2><p>平滑就比较简单了，这里用了<code>均值滤波</code>，说白了就是前后求均值。</p>
+<p>直接上代码吧，原理简单效果显著</p>
+<pre><code class="c++">std::vector&lt;double&gt; blur(const std::vector&lt;double&gt;&amp; data, int kernel_size, double center_value)
+{
+    std::vector&lt;double&gt; dst;
+    for (int i = 0; i != data.size(); ++i) {
+        // 均值滤波
+        double sum = data.at(i) * center_value;
+        double count = center_value;
+        for (int j = 1; j != kernel_size; ++j) {
+            if (i - j &gt;= 0) {
+                sum += data.at(i - j);
+                ++count;
+            }
+            if (i + j &lt; data.size()) {
+                sum += data.at(i + j);
+                ++count;
+            }
+        }
+        dst.push_back(sum / count);
     }
+    return dst;
+}
+</code></pre>
+<p><img src="/post_images/crest_2.png" alt="平滑曲线"></p>
+<p>当然也可以尝试更高级的高斯滤波或者其他方法，有兴趣可以再研究一下。</p>
+<h2 id="求散点导"><a href="#求散点导" class="headerlink" title="求散点导"></a>求散点导</h2><p>曲线拟合比较复杂，主要波形也不固定需要分段拟合，运行环境也不一定能上ml，所有还是手工用算法操作，这里使用的是<code>中间差分法</code>，具体的数学原理就不是我们研究的范围了，<a href="http://379910987.blog.163.com/blog/static/33523797201293125832513/" target="_blank" rel="noopener">公式</a>可以参考一下</p>
+<pre><code class="c++">std::vector&lt;double&gt; derivative(const std::vector&lt;double&gt;&amp; data, const int h_value)
+{
+    std::vector&lt;double&gt; dst;
+    for (int x = 2 * h_value; x != data.size() - (2 * h_value); ++x) {
+        double fx = (-data.at(x + 2 * h_value) + 8 * data.at(x + h_value) - 8 * data.at(x - h_value) + data.at(x - 2 * h_value)) / (12 * h_value);
+        dst.push_back(fx);
+    }
+    return dst;
+}
+</code></pre>
+<p>这里没有对前后<code>2*h_value</code>进行计算，可以使用<code>向前差分</code>和<code>向后差分</code>进行完整的散点导数计算，由于我们的项目不需要，所以不做赘述</p>
+<p><em>上面是重新调整参数后的平滑曲线，下面是已经平滑过的导函数曲线</em><br><img src="/post_images/crest_3.png" alt="导函数曲线"></p>
+<h2 id="散点导平滑"><a href="#散点导平滑" class="headerlink" title="散点导平滑"></a>散点导平滑</h2><p>没什么好说的，将导数的数据再次进行平滑即可</p>
+<h2 id="求极值"><a href="#求极值" class="headerlink" title="求极值"></a>求极值</h2><p>由于我们求出来的是散点导数，而不是导数方程，所以直接通过<code>f&#39;(x) == 0</code>判断并不合适（因为散点并不一定落在x轴上），但是导数点一定是两边异号，这样也就很好判断了，通过<code>f&#39;(x-x0) * f&#39;(x) &lt;= 0</code>即可。</p>
+<pre><code class="c++">std::vector&lt;double&gt; extremum(const std::vector&lt;double&gt;&amp; data, int flag = 0)
+{
+    std::vector&lt;double&gt; dst;
+    for (int i = 1; i != data.size(); ++i) {
+        // 左右异号，则为极值
+        if (data.at(i - 1) * data.at(1) &lt;= 0) {
+            if (flag &gt; 0) {
+                if (data.at(i - 1) &lt; 0 || data.at(i) &gt; 0) {
+                    continue;
+                }
+            } else if (flag &lt; 0) {
+                if (data.at(i - 1) &gt; 0 || data.at(i) &lt; 0) {
+                    continue;
+                }
+            }
+            else {  // flag == 0
+                ;
+            }
+            // 取离0近的那个
+            if (std::abs(data.at(i - 1)) &lt; std::abs(data.at(i))) {
+                dst.push_back(i - 1);
+            } else {
+                dst.push_back(i);
+            }
+        }
+    }
+    return dst;
+}
+</code></pre>
+<p>代码中的<code>flag</code>参数用于仅取极大值或极小值。</p>
+<h2 id="积分求面积"><a href="#积分求面积" class="headerlink" title="积分求面积"></a>积分求面积</h2><p><code>Σf(x-x0)</code>，x0即为要选择的底部，积分范围从上一个极小值到下一个极小值即可。</p>
+<p>我们的需求比较特殊，需要取值区间宽度固定，由于以第一个波峰作为基准，所以取其上一个极小值到下一个极小值的宽度的比值（实际取了三分之一）</p>
+<pre><code class="c++">double crest_area(const std::vector&lt;double&gt;&amp; data, const std::vector&lt;double&gt;&amp; extrem, int crest_index, int width_ratio = 3)
+{
+    int width = (extrem.at(1) - extrem.at(0)) / width_ratio;
+    double bottom = data.at(extrem.at(1));
+    // 积分求面积
+    double area = 0;
+    for (int i = -width; i != width; ++i) {
+        area += data.at(extrem.at(i * 2)) - bottom;
+    }
+    return area;
+}
+</code></pre>
+<h2 id="调用"><a href="#调用" class="headerlink" title="调用"></a>调用</h2><p>依次调各个函数吧</p>
+<pre><code class="c++">struct CrestRatioArg;
+
+std::vector&lt;double&gt; calc_crest_ratio(const std::vector&lt;double&gt;&amp; data, const CrestRatioArg &amp; arg)
+{
+    auto blur_dst = blur(data, arg.kernel_size1, arg.center_value1);
+    auto dv_dst = derivative(blur_dst, arg.dv_h_value);
+    auto dv_blur_dst = blur(dv_dst, arg.kernel_size2, arg.center_value2);
+    auto full_extrem_dst = extremum(dv_blur_dst);
+
+    std::vector&lt;double&gt; result;    
+    if (full_extrem_dst.empty()) {
+        return result;
+    }
+    double first_crest_area = crest_area(blur_dst, full_extrem_dst, 0, arg.integral_width_ratio);
+    if (first_crest_area == 0) {
+        return result;
+    }
+    for (int i = 1; i != full_extrem_dst.size() / 2 + 1; ++i) {
+        double current_area = crest_area(blur_dst, full_extrem_dst, i, arg.integral_width_ratio);
+        result.push_back(current_area / first_crest_area);
+    }
+    return result;
+}
+
+struct CrestRatioArg {
+    int kernel_size1 = 100;
+    int center_value1 = 1;
+    int dv_h_value = 100;
+    int kernel_size2 = 20;
+    int center_value2 = 1;
+    int integral_width_ratio = 3;
+};
+</code></pre>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+    <!-- 使用 gitcoment -->
+<div id="gitment-comment">
+    <!-- Gitment 评论框 -->
+<div id="container"></div>
+</div>
+<style>
+    #gitment-comment {
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+        id: 'Mon Aug 13 2018 17:17:05 GMT+0800', // 可选。默认为 location.href
+        owner: 'MistEO',
+        repo: 'misteo.github.io',
+        oauth: {
+            client_id: '9daf0aa1bbd84937927e',
+            client_secret: 'afc59e71afc8bb1ab612674e377d3e56183c04b9',
+        },
+    })
+    gitment.render('container')
 </script>
 
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
     
-</div>
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2018/06/12/QML中ListView访问子组件/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
 
 
                     
@@ -735,6 +872,14 @@ It will not impact the appearance and can give developers a lot of support :)
                     
 
                     
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
 
                     <!--Footer-->
 <footer class="mdl-mini-footer" id="bottom">
@@ -883,6 +1028,10 @@ It will not impact the appearance and can give developers a lot of support :)
 <!-- Import prettify js  -->
 
     
+        
+            <script>lsloader.load("prettify_js","/js/prettify.min.js?WN07fivHQSMKWy7BmHBB6w==", true)</script>
+        
+    
 
 
 
@@ -895,6 +1044,11 @@ It will not impact the appearance and can give developers a lot of support :)
     });
 
     
+        
+            $(function() {
+                $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+                prettyPrint();
+                })
         
     
     
