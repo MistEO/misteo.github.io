@@ -104,6 +104,8 @@
             return this.cirle.point.y < (this.tree.height + 20);
         },
         move: function (x, y) {
+            var bgm = document.getElementById('bgm');
+            bgm.play();
             this.clear();
             this.drawCirle();
             this.addPosition(x, y);
