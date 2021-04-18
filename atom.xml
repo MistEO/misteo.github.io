@@ -129,9 +129,9 @@
     </summary>
     
     
-      <category term="教程" scheme="http://www.misteo.top/tags/%E6%95%99%E7%A8%8B/"/>
-    
       <category term="路由器" scheme="http://www.misteo.top/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/"/>
+    
+      <category term="教程" scheme="http://www.misteo.top/tags/%E6%95%99%E7%A8%8B/"/>
     
   </entry>
   
@@ -184,7 +184,7 @@
     <link href="http://www.misteo.top/2018/03/07/Hello-World/"/>
     <id>http://www.misteo.top/2018/03/07/Hello-World/</id>
     <published>2018-03-07T09:23:47.000Z</published>
-    <updated>2020-11-30T13:16:04.430Z</updated>
+    <updated>2020-11-30T13:16:04.000Z</updated>
     
     <content type="html"><![CDATA[<p>emmm，这大概就是第一篇博文了</p>]]></content>
     
