@@ -22,6 +22,7 @@ class Impl;
 
 class Widget
 {
+public:
     Impl * pImpl;
 };
 ```
@@ -36,6 +37,7 @@ class Impl;
 
 class Widget
 {
+public:
     std::unique_ptr<Impl> pImpl;
 };
 ```
@@ -144,6 +146,7 @@ class Impl;
 
 class Widget
 {
+public:
     std::shared_ptr<Impl> pImpl;
 };
 ```
@@ -152,11 +155,11 @@ class Widget
 
 那为什么`unique_ptr`不能使用预先声明的`incomplete type`，但是`shared_ptr`却可以？
 
-因为对于`unique_ptr`而言，删除器是类型的一部分：
+因为对于`unique_ptr`而言，删除器是类型的一部分。主模板是这个，不是数组特化`unique_ptr<_Tp[]>`：
 
 ```c++
-  template<typename _Tp, typename _Dp>
-    class unique_ptr<_Tp[], _Dp>
+template<typename _Tp, typename _Dp = default_delete<_Tp>>
+  class unique_ptr;
 ```
 
 这里的`_Tp`是`element_type`，`_Dp`是`deleter_type`
@@ -189,7 +192,8 @@ auto my_deleter = [](Impl * p) {...};
 std::unique_ptr<Impl, decltype(my_deleter)> w1(new Impl, my_deleter);
 std::unique_ptr<Impl> w2(new Impl); // default_deleter
 
-// w1的类型是 std::unique_ptr<Impl, lambda []void (Impl *p)->void>
+// w1的类型是 std::unique_ptr<Impl, decltype(my_deleter)>
+// lambda 的类型是独一无二的，不能写成 []void (Impl *p)->void
 // w2的类型是 std::unique_ptr<Impl, std::default_delete<Impl>>
 
 w1 = std::move(w2); // 错误！类型不同，没有重载operator=
@@ -211,6 +215,7 @@ class Impl;
 
 class Widget
 {
+public:
     struct ImplDeleter final
     {
         constexpr ImplDeleter() noexcept = default;
@@ -278,10 +283,11 @@ class Impl;
 
 class Widget
 {
+public:
     Widget();
     ~Widget();  // 仅声明
 
-    std::unique_ptr<Impl> pImpl;
+    std::unique_ptr<Impl> pImpl = nullptr;
 };
 ```
 
@@ -297,7 +303,7 @@ Widget::Widget()
 Widget::~Widget() = default;    // 在这里定义
 ```
 
-这样就解决了！是不是出乎意料的简单！并且你也可以正常的使用`std::make_unique`来进行赋值。唯一的缺点就是你没法在头文件中初始化`pImpl`了
+这样就解决了！是不是出乎意料的简单！并且你也可以在`widget.cpp`里正常使用`std::make_unique`来赋值。头文件里写成`pImpl = nullptr`是可以的，不需要完整类型；不能在头文件里写的是`new Impl`或者`std::make_unique<Impl>()`，因为那时候`Impl`还不完整
 
 但也有别的问题，因为不光是析构函数中需要析构`std::unique_ptr`，还有别的也需要，比如移动构造、移动运算符等。所以在移动构造、移动运算符中，你也会遇到同样的编译错误。解决方法也很简单，同上面一样：
 
@@ -309,13 +315,14 @@ class Impl;
 
 class Widget
 {
+public:
     Widget();
     ~Widget();
 
     Widget(Widget && rhs);  // 同析构函数，仅声明
     Widget& operator=(Widget&& rhs);
 
-    std::unique_ptr<Impl> pImpl;
+    std::unique_ptr<Impl> pImpl = nullptr;
 };
 ```
 

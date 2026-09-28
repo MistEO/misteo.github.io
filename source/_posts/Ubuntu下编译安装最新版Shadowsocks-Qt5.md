@@ -41,8 +41,9 @@ sudo ldconfig
 ## 安装`libQtShadowsocks`
 
 ```bash
-sudo apt-get install qt5-qmake qtbase5-dev libqrencode-dev libqtshadowsocks-dev libappindicator-dev libzbar-dev libbotan1.10-dev
+sudo apt-get install qt5-qmake qtbase5-dev libqrencode-dev libappindicator-dev libzbar-dev
 git clone https://github.com/shadowsocks/libQtShadowsocks.git
+cd libQtShadowsocks
 mkdir build
 cd build
 cmake ..
@@ -51,12 +52,7 @@ sudo make install
 sudo ldconfig
 ```
 
-如果软件源中没有libqtshadowsocks-dev，可以使用pip安装
-
-```bash
-sudo apt-get install python-pip
-sudo pip install shadowsocks
-```
+软件源里的`libqtshadowsocks-dev`是配`libbotan1.10`的旧包，不支持前面要的 AEAD，也不能用`pip install shadowsocks`来代替。那个 pip 包装的是 Python 版 shadowsocks，和这个 C++ 库不是同一个东西。上面已经装过 Botan 2，这里就不要再装`libbotan1.10-dev`了，两套 Botan 会搅在一起。
 
 如果原先安装过Qt，可能会提示找不到Qt目录，导入环境变量，然后重新编译安装
 
@@ -72,7 +68,7 @@ sudo ldconfig
 ## 安装`Shadowsocks-Qt5`
 
 ```bash
-sudo apt-get install qt5-qmake qtbase5-dev libqrencode-dev libqtshadowsocks-dev libappindicator-dev libzbar-dev libbotan1.10-dev
+sudo apt-get install qt5-qmake qtbase5-dev libqrencode-dev libappindicator-dev libzbar-dev
 git clone https://github.com/shadowsocks/shadowsocks-qt5.git
 cd shadowsocks-qt5
 mkdir build
