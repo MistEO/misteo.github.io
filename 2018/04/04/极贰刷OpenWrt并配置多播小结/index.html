@@ -53,7 +53,7 @@
     <link rel="icon" href="/img/myfavicon.png">
 
     <meta name="format-detection" content="telephone=no"/>
-    <meta name="description" itemprop="description" content="这几天把公司宿舍的网络好好的折腾了一下，从平均10Mbps最高20Mbps勉强提升到了稳定30Mbps，总结一下心得">
+    <meta name="description" itemprop="description" content="这几天把公司宿舍的网络好好的折腾了一下，从平均10Mbps、最高20Mbps，勉强提升到了稳定30Mbps，总结一下心得">
     <meta name="keywords" content=",教程,路由器">
     <meta name="theme-color" content="#0097A7">
 
@@ -233,12 +233,12 @@
     <meta property="og:type" content="blog">
     <meta property="og:title" content="HC5761刷OpenWrt并配置多播小结 | 肝！">
     <meta property="og:image" content="https://misteo.top/img/myfavicon.png">
-    <meta property="og:description" content="这几天把公司宿舍的网络好好的折腾了一下，从平均10Mbps最高20Mbps勉强提升到了稳定30Mbps，总结一下心得">
+    <meta property="og:description" content="这几天把公司宿舍的网络好好的折腾了一下，从平均10Mbps、最高20Mbps，勉强提升到了稳定30Mbps，总结一下心得">
     <meta property="og:article:tag" content="教程"> <meta property="og:article:tag" content="路由器"> 
 
     
         <meta property="article:published_time" content="Wed Apr 04 2018 10:55:17 GMT+0800">
-        <meta property="article:modified_time" content="Mon Sep 28 2026 19:28:47 GMT+0800">
+        <meta property="article:modified_time" content="Mon Sep 28 2026 19:35:05 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -261,7 +261,7 @@
     "mainEntityOfPage": "https://misteo.top/2018/04/04/%E6%9E%81%E8%B4%B0%E5%88%B7OpenWrt%E5%B9%B6%E9%85%8D%E7%BD%AE%E5%A4%9A%E6%92%AD%E5%B0%8F%E7%BB%93/index.html",
     "headline": "HC5761刷OpenWrt并配置多播小结",
     "datePublished": "Wed Apr 04 2018 10:55:17 GMT+0800",
-    "dateModified": "Mon Sep 28 2026 19:28:47 GMT+0800",
+    "dateModified": "Mon Sep 28 2026 19:35:05 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "MistEO",
@@ -280,7 +280,7 @@
         }
     },
     "keywords": ",教程,路由器",
-    "description": "这几天把公司宿舍的网络好好的折腾了一下，从平均10Mbps最高20Mbps勉强提升到了稳定30Mbps，总结一下心得",
+    "description": "这几天把公司宿舍的网络好好的折腾了一下，从平均10Mbps、最高20Mbps，勉强提升到了稳定30Mbps，总结一下心得",
 }
 </script>
 
@@ -477,11 +477,11 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <p>这几天把公司宿舍的网络好好的折腾了一下，从平均10Mbps最高20Mbps勉强提升到了稳定30Mbps，总结一下心得</p>
+        <p>这几天把公司宿舍的网络好好的折腾了一下，从平均10Mbps、最高20Mbps，勉强提升到了稳定30Mbps，总结一下心得</p>
 <span id="more"></span>
 
-<h2 id="获取Root"><a href="#获取Root" class="headerlink" title="获取Root"></a>获取Root</h2><p>云插件中安装<code>开发中模式</code>，好像还要关联微信什么的，GUI操作应该不困难，感觉没啥好说的，<del>其实是因为好久以前弄的具体的我不记得了</del></p>
-<h2 id="刷机"><a href="#刷机" class="headerlink" title="刷机"></a>刷机</h2><p>注意以下命令行都是基于极贰（<code>HC5761</code>)，其他路由器同理，但需要改一下链接下载符合自己机型的文件不要直接复制</p>
+<h2 id="获取Root"><a href="#获取Root" class="headerlink" title="获取Root"></a>获取Root</h2><p>云插件中安装<code>开发者模式</code>，好像还要关联微信什么的，GUI操作应该不困难，感觉没啥好说的，<del>其实是因为好久以前弄的具体的我不记得了</del></p>
+<h2 id="刷机"><a href="#刷机" class="headerlink" title="刷机"></a>刷机</h2><p>注意以下命令行都是基于极贰（<code>HC5761</code>），其他路由器同理，但需要改一下链接，下载符合自己机型的文件，不要直接复制</p>
 <h3 id="连上极路由"><a href="#连上极路由" class="headerlink" title="连上极路由"></a>连上极路由</h3><pre><code class="language-bash">ssh -p 1022 root@192.168.1.1
 </code></pre>
 <p>密码就是路由器的管理密码</p>
@@ -517,7 +517,7 @@ sysupgrade -F -n openwrt-ramips-mt7620a-hc5761-squashfs-sysupgrade.bin
 <li><a target="_blank" rel="noopener" href="http://www.right.com.cn/forum/thread-161906-1-1.html">AR&#x2F;QCA&#x2F;MTK Breed，功能强大的多线程 Bootloader ,恩山无线论坛</a></li>
 <li><a target="_blank" rel="noopener" href="http://www.right.com.cn/forum/thread-161324-1-1.html">改华硕[N14U N54U]5G 2G的7620老毛子Padavan固件(私人云储存 aria2 QOS) ,恩山无线论坛</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lvshaorong/article/details/70568791">OpenWrt路由器macvlan单线多拨的方法 - CSDN博客</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lvshaorong/article/details/61916525">OpwnWrt 路由器MWAN3多线多拨实现方法 - CSDN博客</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lvshaorong/article/details/61916525">OpenWrt 路由器MWAN3多线多拨实现方法 - CSDN博客</a></li>
 </ul>
 
         

@@ -53,7 +53,7 @@
     <link rel="icon" href="/img/myfavicon.png">
 
     <meta name="format-detection" content="telephone=no"/>
-    <meta name="description" itemprop="description" content="在C标准库中提供了字符串拷贝函数strcpy，而微软则为为它提供了一个更安全的版本strcpy_s，其函数原型为
+    <meta name="description" itemprop="description" content="在C标准库中提供了字符串拷贝函数strcpy，而微软则为它提供了一个更安全的版本strcpy_s，其函数原型为
 errno_t __cdecl strcpy_s(
     char*       _Destination,
     rsize_t     _SizeInBytes,
@@ -61,7 +61,7 @@ errno_t __cdecl strcpy_s(
     );
 
 分享下它的实现和一些个人理解">
-    <meta name="keywords" content=",C/C++,STL,算法">
+    <meta name="keywords" content=",算法,C/C++,STL">
     <meta name="theme-color" content="#0097A7">
 
     <!-- Disable Fucking Bloody Baidu Tranformation -->
@@ -240,7 +240,7 @@ errno_t __cdecl strcpy_s(
     <meta property="og:type" content="blog">
     <meta property="og:title" content="安全的字符串拷贝strcpy_s的实现与理解 | 肝！">
     <meta property="og:image" content="https://misteo.top/img/myfavicon.png">
-    <meta property="og:description" content="在C标准库中提供了字符串拷贝函数strcpy，而微软则为为它提供了一个更安全的版本strcpy_s，其函数原型为
+    <meta property="og:description" content="在C标准库中提供了字符串拷贝函数strcpy，而微软则为它提供了一个更安全的版本strcpy_s，其函数原型为
 errno_t __cdecl strcpy_s(
     char*       _Destination,
     rsize_t     _SizeInBytes,
@@ -248,11 +248,11 @@ errno_t __cdecl strcpy_s(
     );
 
 分享下它的实现和一些个人理解">
-    <meta property="og:article:tag" content="C/C++"> <meta property="og:article:tag" content="STL"> <meta property="og:article:tag" content="算法"> 
+    <meta property="og:article:tag" content="算法"> <meta property="og:article:tag" content="C/C++"> <meta property="og:article:tag" content="STL"> 
 
     
         <meta property="article:published_time" content="Wed Oct 21 2020 15:29:00 GMT+0800">
-        <meta property="article:modified_time" content="Mon Sep 28 2026 19:28:47 GMT+0800">
+        <meta property="article:modified_time" content="Mon Sep 28 2026 19:35:05 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -275,7 +275,7 @@ errno_t __cdecl strcpy_s(
     "mainEntityOfPage": "https://misteo.top/2020/10/21/%E5%AE%89%E5%85%A8%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8B%B7%E8%B4%9Dstrcpy-s%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E7%90%86%E8%A7%A3/index.html",
     "headline": "安全的字符串拷贝strcpy_s的实现与理解",
     "datePublished": "Wed Oct 21 2020 15:29:00 GMT+0800",
-    "dateModified": "Mon Sep 28 2026 19:28:47 GMT+0800",
+    "dateModified": "Mon Sep 28 2026 19:35:05 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "MistEO",
@@ -293,8 +293,8 @@ errno_t __cdecl strcpy_s(
             "url": "/img/myfavicon.png"
         }
     },
-    "keywords": ",C/C++,STL,算法",
-    "description": "在C标准库中提供了字符串拷贝函数strcpy，而微软则为为它提供了一个更安全的版本strcpy_s，其函数原型为
+    "keywords": ",算法,C/C++,STL",
+    "description": "在C标准库中提供了字符串拷贝函数strcpy，而微软则为它提供了一个更安全的版本strcpy_s，其函数原型为
 errno_t __cdecl strcpy_s(
     char*       _Destination,
     rsize_t     _SizeInBytes,
@@ -498,7 +498,7 @@ errno_t __cdecl strcpy_s(
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <p>在C标准库中提供了字符串拷贝函数<code>strcpy</code>，而微软则为为它提供了一个更安全的版本<code>strcpy_s</code>，其函数原型为</p>
+        <p>在C标准库中提供了字符串拷贝函数<code>strcpy</code>，而微软则为它提供了一个更安全的版本<code>strcpy_s</code>，其函数原型为</p>
 <pre><code class="language-c++">errno_t __cdecl strcpy_s(
     char*       _Destination,
     rsize_t     _SizeInBytes,
@@ -573,7 +573,7 @@ errno_t __cdecl _FUNC_NAME(_CHAR *_DEST, size_t _SIZE, const _CHAR *_SRC)
 }
 </code></pre>
 <p>首先明确一点，多出来的参数<code>size_t _SIZE</code>需要传入目的地址可用长度，即<code>_DEST</code>的可用长度</p>
-<p>实现中多了几个宏定义，我们先<strong>猜一下</strong>他们是干嘛的，然后带着疑问往下看。</p>
+<p>实现中多了几个宏定义，我们先<strong>猜一下</strong>它们是干嘛的，然后带着疑问往下看。</p>
 <p>不感兴趣的同学也可以跳过这一章，直接看后面的<a href="#%E5%88%86%E6%9E%90%E7%BB%93%E8%AE%BA">分析结论</a></p>
 <h2 id="详细分析过程"><a href="#详细分析过程" class="headerlink" title="详细分析过程"></a>详细分析过程</h2><p>（<em>注：以下为猜测内容，与实际可能有较大差异，正确解释请接着往后看每个宏定义的详细分析</em>）</p>
 <h3 id="总体猜测"><a href="#总体猜测" class="headerlink" title="总体猜测"></a>总体猜测</h3><ul>
@@ -589,7 +589,7 @@ errno_t __cdecl _FUNC_NAME(_CHAR *_DEST, size_t _SIZE, const _CHAR *_SRC)
 <li>先两个<code>_VALIDATE</code>宏，验证目的字符串和源字符串的合法性</li>
 <li>开始逐字符拷贝，如果正常拷到<code>&#39;\0&#39;</code>，或者<code>available</code>跑完了，就停止</li>
 <li>如果2.中是<code>available</code>跑完了，说明SRC的长度超过了SIZE，即超过了目的字符串最大可用长度。拷贝失败了，重置DEST，整理错误信息，return错误码。</li>
-<li>正常拷到<code>&#39;\0&#39;</code>，就把DEST剩余的后半部分<code>[_SIZE - available + 1, _Size)</code>全填充为某个比较安全的值。</li>
+<li>正常拷到<code>&#39;\0&#39;</code>，就把DEST剩余的后半部分<code>[_SIZE - available + 1, _SIZE)</code>全填充为某个比较安全的值。</li>
 <li>return 0 结束。</li>
 </ol>
 <p>下面逐个分析下这些宏，为了便于理解，我整理了一下，不要在意定义的先后顺序~</p>
@@ -651,10 +651,10 @@ errno_t __cdecl _FUNC_NAME(_CHAR *_DEST, size_t _SIZE, const _CHAR *_SRC)
 // from internal.h
 #define _CALL_INVALID_PARAMETER(expr) _invalid_parameter(expr, __FUNCTIONW__, __FILEW__, __LINE__, 0)
 </code></pre>
-<p><code>_INVALID_PARAMETER</code>说实话我真没太看明白在干嘛，继续追踪后来会到<code>invarg.c</code>中，套娃套的太多了，看不过来了。。获取了<code>__FUNCTION__</code>、<code>__LINE__</code>等，估计是记录错误，可能在VS的调试器等中有体现，有兴趣的同学也自行也就看下吧</p>
-<h4 id="小结（-VALIDATE-STRING）"><a href="#小结（-VALIDATE-STRING）" class="headerlink" title="小结（-VALIDATE-STRING）"></a>小结（-VALIDATE-STRING）</h4><p>总结一下，就是检查<code>(_DEST != NULL &amp;&amp; _Size &gt; 0)</code>，不满足的话，赋值errno，并直接返回错误码，（_DEBUG模式下，还会弹窗提示，并触发调试断点）。简单实现如下</p>
+<p><code>_INVALID_PARAMETER</code>说实话我真没太看明白在干嘛，继续追踪后来会到<code>invarg.c</code>中，套娃套的太多了，看不过来了。。获取了<code>__FUNCTION__</code>、<code>__LINE__</code>等，估计是记录错误，可能在VS的调试器等中有体现，有兴趣的同学也自行看一下吧</p>
+<h4 id="小结（-VALIDATE-STRING）"><a href="#小结（-VALIDATE-STRING）" class="headerlink" title="小结（-VALIDATE-STRING）"></a>小结（-VALIDATE-STRING）</h4><p>总结一下，就是检查<code>(_DEST != NULL &amp;&amp; _SIZE &gt; 0)</code>，不满足的话，赋值errno，并直接返回错误码，（_DEBUG模式下，还会弹窗提示，并触发调试断点）。简单实现如下</p>
 <pre><code class="language-c++">// Same like _VALIDATE_STRING(_DEST, _SIZE);
-if (_DEST == NULL || _Size &lt;= 0)
+if (_DEST == NULL || _SIZE &lt;= 0)
 {
     errno = EINVAL;
     return EINVAL;
@@ -675,7 +675,7 @@ if (_DEST == NULL || _Size &lt;= 0)
         _VALIDATE_POINTER_ERROR_RETURN((_Pointer), EINVAL, (_Ret)) \
     }
 </code></pre>
-<p>如果<code>_SRC</code>为<code>NULL</code>，才进行<code>_RESET_STRING</code>和<code>_VALIDATE_POINTER_ERROR_RETURN</code>的操作，就是如果源字符串NULL，直接把目的字符串重置，然后返回验证一个什么值并返回</p>
+<p>如果<code>_SRC</code>为<code>NULL</code>，才进行<code>_RESET_STRING</code>和<code>_VALIDATE_POINTER_ERROR_RETURN</code>的操作，就是如果源字符串NULL，直接把目的字符串重置，然后校验并返回</p>
 <pre><code class="language-c++">// from internal_securecrt.h
 #define _RESET_STRING(_String, _Size) \
     *(_String) = 0; \
@@ -721,7 +721,7 @@ if (_DEST == NULL || _Size &lt;= 0)
 // from dbgheap.c
 extern &quot;C&quot; size_t __crtDebugFillThreshold = SIZE_MAX;
 </code></pre>
-<p>这里比较巧妙，重置字符串，一般情况下仅将_DSET首个char的值赋值 <code>*(_DEST) = 0;</code>；DEBUG模式下才<code>_FILL_STRING</code>，其中还用<code>_SECURECRT_FILL_BUFFER_THRESHOLD</code>长度判断，还是跟着DEBUG走的，用memset将后面剩下的char赋值为254。后面在<code>_FILL_STRING</code>章节详细论述一下这个</p>
+<p>这里比较巧妙，重置字符串，一般情况下仅将_DEST首个char的值赋值 <code>*(_DEST) = 0;</code>；DEBUG模式下才<code>_FILL_STRING</code>，其中还用<code>_SECURECRT_FILL_BUFFER_THRESHOLD</code>长度判断，还是跟着DEBUG走的，用memset将后面剩下的char赋值为254。后面在<code>_FILL_STRING</code>章节详细论述一下这个</p>
 <pre><code class="language-c++">// from internal_securecrt.h
 #define _VALIDATE_POINTER_ERROR_RETURN(_Pointer, _ErrorCode, _Ret) \
     _VALIDATE_RETURN((_Pointer) != NULL, (_ErrorCode), (_Ret))
@@ -816,9 +816,9 @@ extern &quot;C&quot; size_t __crtDebugFillThreshold = SIZE_MAX;
 <p>然后<code>memset</code>从<code>(_String) + (_Offset)</code>地址开始，填充<code>0xFE</code>。非DEBUG模式下填充0个字节，还是相当于什么也不做，多一重判断；DEBUG模式下填充<code>(_Size - _Offset) * sizeof(char)</code>。</p>
 <h4 id="小结（-FILL-STRING）"><a href="#小结（-FILL-STRING）" class="headerlink" title="小结（-FILL-STRING）"></a>小结（-FILL-STRING）</h4><pre><code class="language-c++">// Same like _FILL_STRING(_DEST, _SIZE, _OFFSET);
 #ifdef _DEBUG
-    if (_OFFSET &lt; _Size)
+    if (_OFFSET &lt; _SIZE)
     {
-        memset(_DEST + _OFFSET, 0xFE, (_Size - _Offset) * sizeof(char));
+        memset(_DEST + _OFFSET, 0xFE, (_SIZE - _OFFSET) * sizeof(char));
     }
 #else
 // Do nothing;
@@ -860,13 +860,13 @@ errno_t __cdecl _FUNC_NAME(_CHAR *_DEST, size_t _SIZE, const _CHAR *_SRC)
 }
 </code></pre>
 <ol>
-<li><code>_VALIDATE_STRING(_DEST, _SIZE);</code> 检验<code>_DEST != NULL &amp;&amp; _Size &gt; 0</code>是否满足；若为假，则<code>errno = EINVAL</code>，并直接<code>return EINVAL</code>；如果是在Debug模式下（<code>_DEBUG</code>宏被定义过）还会弹出提示窗口、触发调试断点、记录下错误发生位置等</li>
+<li><code>_VALIDATE_STRING(_DEST, _SIZE);</code> 检验<code>_DEST != NULL &amp;&amp; _SIZE &gt; 0</code>是否满足；若为假，则<code>errno = EINVAL</code>，并直接<code>return EINVAL</code>；如果是在Debug模式下（<code>_DEBUG</code>宏被定义过）还会弹出提示窗口、触发调试断点、记录下错误发生位置等</li>
 <li><code>_VALIDATE_POINTER_RESET_STRING(_SRC, _DEST, _SIZE);</code> 判断<code>_SRC == NULL</code>是否满足；若为真，则Reset <code>_DEST</code>，<code>errno = EINVAL</code>，并直接<code>return EINVAL</code>，Debug模式下也同样弹窗、断点、错误等</li>
 <li>算法逻辑：与分析中的没有区别，逐字符拷贝，如果正常拷到<code>&#39;\0&#39;</code>，或者<code>available</code>跑完了，就停止</li>
 <li>如果<code>available == 0</code>，说明<code>_SRC</code>的长度超过了<code>_SIZE</code>，即超过了目的字符串最大可用长度，拷贝失败。</li>
 <li><code>_RESET_STRING(_DEST, _SIZE);</code> 重置字符串，<code>*_DEST = 0;</code>，且<code>_FILL_STRING(_DEST, _SIZE, 1);</code>。即将首个字符赋值为<code>&#39;\0&#39;</code>，后面的字符填充安全字符<code>0xFE</code>。需要说明的是，<code>_FILL_STRING</code>也仅在Debug模式下才进行，否则什么也不处理</li>
 <li><code>_RETURN_BUFFER_TOO_SMALL(_DEST, _SIZE);</code> <code>errno = ERANGE</code>，并直接<code>return ERANGE</code>，Debug模式下也同样弹窗、断点、错误等</li>
-<li><code>_FILL_STRING(_DEST, _SIZE, _SIZE - available + 1);</code>就是调用<code>memset</code>，将<code>_DEST</code>比<code>_SRC</code>多出来的部分（<code>[_SIZE - available + 1, _Size)</code>）全部填充为安全字符<code>0xFE</code>。同样，<code>_FILL_STRING</code>也仅在Debug模式下才进行，否则什么也不处理</li>
+<li><code>_FILL_STRING(_DEST, _SIZE, _SIZE - available + 1);</code>就是调用<code>memset</code>，将<code>_DEST</code>比<code>_SRC</code>多出来的部分（<code>[_SIZE - available + 1, _SIZE)</code>）全部填充为安全字符<code>0xFE</code>。同样，<code>_FILL_STRING</code>也仅在Debug模式下才进行，否则什么也不处理</li>
 </ol>
 <p>可能有点绕，接着看下一章节简化实现应该就清晰了~</p>
 <h2 id="简化实现"><a href="#简化实现" class="headerlink" title="简化实现"></a>简化实现</h2><p>看完了源码，我们来写个简单点的strcpy_s吧</p>
@@ -877,7 +877,7 @@ errno_t strcpy_s(char *_DEST, size_t _SIZE, const char *_SRC)
     char *p;
     size_t available;
 
-    if (!(_DEST != NULL &amp;&amp; _Size &gt; 0))
+    if (!(_DEST != NULL &amp;&amp; _SIZE &gt; 0))
     {
         errno = EINVAL;
         return EINVAL;
@@ -919,7 +919,7 @@ inline void fill_string(char * string, size_t size, size_t offset)
 #endif
 }
 </code></pre>
-<h2 id="扩展延伸"><a href="#扩展延伸" class="headerlink" title="扩展延伸"></a>扩展延伸</h2><p>既然讲完了<code>strcpy_s</code>，那其他的字符串操作函数的<code>_safe</code>版本呢？下面再看下<code>strcat_s</code>和<code>strset_s</code>。也不多啰嗦了，直接粘出没见过的宏的实现，然后我们在写个简化实现看下~</p>
+<h2 id="扩展延伸"><a href="#扩展延伸" class="headerlink" title="扩展延伸"></a>扩展延伸</h2><p>既然讲完了<code>strcpy_s</code>，那其他的字符串操作函数的<code>_safe</code>版本呢？下面再看下<code>strcat_s</code>和<code>strset_s</code>。也不多啰嗦了，直接粘出没见过的宏的实现，然后再写个简化实现看下~</p>
 <h3 id="strcat-s"><a href="#strcat-s" class="headerlink" title="strcat_s"></a><code>strcat_s</code></h3><pre><code class="language-c++">/***
 *tcscat_s.inl - general implementation of _tcscpy_s
 *
@@ -980,7 +980,7 @@ errno_t strcat_s(char *_DEST, size_t _SIZE, const char *_SRC)
     char *p;
     size_t available;
 
-    if (!(_DEST != NULL &amp;&amp; _Size &gt; 0))
+    if (!(_DEST != NULL &amp;&amp; _SIZE &gt; 0))
     {
         errno = EINVAL;
         return EINVAL;
@@ -1034,6 +1034,7 @@ inline void fill_string(char * string, size_t size, size_t offset)
     // do nothing
     ;
 #endif
+}
 </code></pre>
 <h3 id="strset-s"><a href="#strset-s" class="headerlink" title="strset_s"></a><code>strset_s</code></h3><pre><code class="language-c++">/***
 *tcsset_s.inl - general implementation of _tcsset_s
@@ -1078,7 +1079,7 @@ errno_t strset_s(char *_DEST, size_t _SIZE, int _Value)
     char *p;
     size_t available;
 
-    if (!(_DEST != NULL &amp;&amp; _Size &gt; 0))
+    if (!(_DEST != NULL &amp;&amp; _SIZE &gt; 0))
     {
         errno = EINVAL;
         return EINVAL;

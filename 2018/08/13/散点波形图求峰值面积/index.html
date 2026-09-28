@@ -54,7 +54,7 @@
 
     <meta name="format-detection" content="telephone=no"/>
     <meta name="description" itemprop="description" content="前段时间接到了个需求，数据是几千个散点，绘制出来波形图，有多个波峰，需求是求出各个波峰与第一个波峰的面积比值。乍一看需求有点难以实现，其实细化成各个模块之后也算比较简单，在这里总结一下经验方法">
-    <meta name="keywords" content=",C/C++,算法">
+    <meta name="keywords" content=",算法,C/C++">
     <meta name="theme-color" content="#0097A7">
 
     <!-- Disable Fucking Bloody Baidu Tranformation -->
@@ -234,11 +234,11 @@
     <meta property="og:title" content="散点波形图求峰值面积比 | 肝！">
     <meta property="og:image" content="https://misteo.top/img/myfavicon.png">
     <meta property="og:description" content="前段时间接到了个需求，数据是几千个散点，绘制出来波形图，有多个波峰，需求是求出各个波峰与第一个波峰的面积比值。乍一看需求有点难以实现，其实细化成各个模块之后也算比较简单，在这里总结一下经验方法">
-    <meta property="og:article:tag" content="C/C++"> <meta property="og:article:tag" content="算法"> 
+    <meta property="og:article:tag" content="算法"> <meta property="og:article:tag" content="C/C++"> 
 
     
         <meta property="article:published_time" content="Mon Aug 13 2018 17:17:05 GMT+0800">
-        <meta property="article:modified_time" content="Mon Sep 28 2026 19:28:47 GMT+0800">
+        <meta property="article:modified_time" content="Mon Sep 28 2026 19:35:05 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -261,7 +261,7 @@
     "mainEntityOfPage": "https://misteo.top/2018/08/13/%E6%95%A3%E7%82%B9%E6%B3%A2%E5%BD%A2%E5%9B%BE%E6%B1%82%E5%B3%B0%E5%80%BC%E9%9D%A2%E7%A7%AF/index.html",
     "headline": "散点波形图求峰值面积比",
     "datePublished": "Mon Aug 13 2018 17:17:05 GMT+0800",
-    "dateModified": "Mon Sep 28 2026 19:28:47 GMT+0800",
+    "dateModified": "Mon Sep 28 2026 19:35:05 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "MistEO",
@@ -279,7 +279,7 @@
             "url": "/img/myfavicon.png"
         }
     },
-    "keywords": ",C/C++,算法",
+    "keywords": ",算法,C/C++",
     "description": "前段时间接到了个需求，数据是几千个散点，绘制出来波形图，有多个波峰，需求是求出各个波峰与第一个波峰的面积比值。乍一看需求有点难以实现，其实细化成各个模块之后也算比较简单，在这里总结一下经验方法",
 }
 </script>
@@ -472,7 +472,7 @@
 <span id="more"></span>
 
 <p><img src="/post_images/crest_1.png" alt="数据绘制"></p>
-<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><p>首先分清要做什么，既然是散点，那肯定需要平滑。得出了平滑曲线之后，怎么求波峰？当然是取极大值，就是散点求导，求完导可能需要对导函数散点再次平滑。求面积就积分，至于积分取值区间，就是前一个极小值到后一个极小值的差。（我们的需求比较特殊，要取值区间固定大小，所以在这里略有不同），总结一下：</p>
+<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><p>首先分清要做什么，既然是散点，那肯定需要平滑。得出了平滑曲线之后，怎么求波峰？当然是取极大值，就是散点求导，求完导可能需要对导函数散点再次平滑。求面积就积分，至于积分取值区间，就是前一个极小值到后一个极小值之间。（我们的需求比较特殊，取值区间要固定大小，所以这里略有不同）。总结一下：</p>
 <ol>
 <li>散点平滑</li>
 <li>求散点导</li>
@@ -507,7 +507,7 @@
 </code></pre>
 <p><img src="/post_images/crest_2.png" alt="平滑曲线"></p>
 <p>当然也可以尝试更高级的高斯滤波或者其他方法，有兴趣可以再研究一下。</p>
-<h2 id="求散点导"><a href="#求散点导" class="headerlink" title="求散点导"></a>求散点导</h2><p>曲线拟合比较复杂，主要波形也不固定需要分段拟合，运行环境也不一定能上ml，所有还是手工用算法操作，这里使用的是<code>中间差分法</code>，具体的数学原理就不是我们研究的范围了，<a target="_blank" rel="noopener" href="http://379910987.blog.163.com/blog/static/33523797201293125832513/">公式</a>可以参考一下</p>
+<h2 id="求散点导"><a href="#求散点导" class="headerlink" title="求散点导"></a>求散点导</h2><p>曲线拟合比较复杂，主要波形也不固定需要分段拟合，运行环境也不一定能上ml，所以还是手工用算法操作，这里使用的是<code>中间差分法</code>，具体的数学原理就不是我们研究的范围了，<a target="_blank" rel="noopener" href="http://379910987.blog.163.com/blog/static/33523797201293125832513/">公式</a>可以参考一下</p>
 <pre><code class="language-c++">std::vector&lt;double&gt; derivative(const std::vector&lt;double&gt;&amp; data, const int h_value)
 {
     std::vector&lt;double&gt; dst;
@@ -518,7 +518,7 @@
     return dst;
 }
 </code></pre>
-<p>这里没有对前后<code>2*h_value</code>进行计算，可以使用<code>向前差分</code>和<code>向后差分</code>进行完整的散点导数计算，由于我们的项目不需要，所以不做赘述</p>
+<p>这里没有对前后<code>2*h_value</code>进行计算，可以使用<code>向前差分</code>和<code>向后差分</code>进行完整的散点导数计算，由于我们的项目不需要，所以不再赘述</p>
 <p><em>上面是重新调整参数后的平滑曲线，下面是已经平滑过的导函数曲线</em><br><img src="/post_images/crest_3.png" alt="导函数曲线"></p>
 <h2 id="散点导平滑"><a href="#散点导平滑" class="headerlink" title="散点导平滑"></a>散点导平滑</h2><p>没什么好说的，将导数的数据再次进行平滑即可</p>
 <h2 id="求极值"><a href="#求极值" class="headerlink" title="求极值"></a>求极值</h2><p>由于我们求出来的是散点导数，而不是导数方程，所以直接通过<code>f&#39;(x) == 0</code>判断并不合适（因为散点并不一定落在x轴上），但是导数点一定是两边异号，这样也就很好判断了，通过<code>f&#39;(x-x0) * f&#39;(x) &lt;= 0</code>即可。</p>
