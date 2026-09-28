@@ -1,0 +1,54 @@
+{
+  "Wed Oct 21 2020 15:29:00 GMT+0800": [
+    {
+      "author": "MistEO",
+      "createdAt": "2020-10-23",
+      "html": "<p>第二次在面试中被问到<code>strcpy_s</code>的实现了，不长记性，还是只回答出了的基本逻辑，没有体现出<code>_Safe</code></p>\n<p>回来一搜，网上也没有中文的<code>strcpy_s</code>实现的解析。于是乎自己好好总结了一下，应该能记牢了</p>\n"
+    }
+  ],
+  "Tue Jun 12 2018 17:56:59 GMT+0800": [
+    {
+      "author": "MistEO",
+      "createdAt": "2020-04-04",
+      "html": "<p>好久没更新了，一般不使用文中的方式，挺笨的。建议定义一个<code>property var []</code>或<code>ListModel</code>或<code>dict</code>作为<code>Listview</code>的<code>model</code>使用，<code>model</code>的值变化则通过每个组件来修改，是预存好而不是惰性获取，参考示例如下</p>\n<pre><code class=\"language-JavaScript\">Listview {\n    property var mymodel: [&quot;apple&quot;, &quot;orange&quot;, &quot;banana&quot;]\n    model: mymodel\n    delegate: Textfield {\n        text: modelData\n        onTextChanged: {\n                // mymodel[index] = text; //无法成功赋值\n                var tmp = mymodel;\n                tmp[index] = text;\n                mymodel = tmp;\n        }\n    }\n    function getText() {\n        return mymodel;\n    }\n    function setText(textarray) {\n        mymodel = textarray;\n    }\n}\n</code></pre>\n"
+    }
+  ],
+  "Wed Apr 04 2018 10:55:17 GMT+0800": [
+    {
+      "author": "MistEO",
+      "createdAt": "2018-08-14",
+      "html": "<p>懒得写了，主要是最近多播效果不太理想，固件我又刷回去了，也不好截图，这篇文章就咕咕咕了。</p>\n<p>真有需要帮助的朋友可以在评论区回复，我看到了会和你一起研究一下问题解决。</p>\n"
+    }
+  ],
+  "Sun Mar 18 2018 23:57:12 GMT+0800": [
+    {
+      "author": "MistEO",
+      "createdAt": "2018-03-23",
+      "html": "<p>嘛，收了一张二手的750Ti，已经换上，感觉日常够用了2333</p>\n"
+    }
+  ],
+  "Wed Mar 07 2018 17:23:47 GMT+0800": [
+    {
+      "author": "MistEO",
+      "createdAt": "2018-03-09",
+      "html": "<p>试一下评论QvQ</p>\n"
+    }
+  ],
+  "Thu Mar 08 2018 11:17:35 GMT+0800": [
+    {
+      "author": "thomas1984",
+      "createdAt": "2018-06-29",
+      "html": "<p>hello,When I type ss-qt5.The Terminal show this error:ss-qt5: error while loading shared libraries: libQtShadowsocks.so.2: cannot open shared object file: No such file or directory.how to do it?</p>\n"
+    },
+    {
+      "author": "thomas1984",
+      "createdAt": "2018-06-30",
+      "html": "<p>博主，libQtShadowsocks这个你make install后忘记ldconfig了</p>\n"
+    },
+    {
+      "author": "MistEO",
+      "createdAt": "2018-07-02",
+      "html": "<p>谢谢提醒，已修改</p>\n"
+    }
+  ]
+}
