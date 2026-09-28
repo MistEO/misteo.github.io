@@ -244,7 +244,7 @@
 
     
         <meta property="article:published_time" content="Mon Nov 30 2020 11:31:17 GMT+0800">
-        <meta property="article:modified_time" content="Mon Sep 28 2026 17:00:18 GMT+0800">
+        <meta property="article:modified_time" content="Mon Sep 28 2026 17:13:15 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -267,7 +267,7 @@
     "mainEntityOfPage": "http://www.misteo.top/2020/11/30/std-unique-ptr%E4%BD%BF%E7%94%A8incomplete-type%E7%9A%84%E6%8A%A5%E9%94%99%E5%88%86%E6%9E%90%E5%92%8C%E8%A7%A3%E5%86%B3/index.html",
     "headline": "std::unique_ptr使用incomplete type的报错分析和解决",
     "datePublished": "Mon Nov 30 2020 11:31:17 GMT+0800",
-    "dateModified": "Mon Sep 28 2026 17:00:18 GMT+0800",
+    "dateModified": "Mon Sep 28 2026 17:13:15 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "MistEO",
@@ -301,7 +301,7 @@
     <!-- Custom Head -->
     
 
-<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="肝！" type="application/atom+xml">
+<meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="肝！" type="application/atom+xml">
 </head>
 
 
@@ -459,12 +459,6 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=http://www.misteo.top/2020/11/30/std-unique-ptr%E4%BD%BF%E7%94%A8incomplete-type%E7%9A%84%E6%8A%A5%E9%94%99%E5%88%86%E6%9E%90%E5%92%8C%E8%A7%A3%E5%86%B3/index.html" target="_blank">
-            <li class="mdl-menu__item">
-                分享到 Google+
-            </li>
-        </a>
-    
 
     <!-- Share LinkedIn -->
     
@@ -494,36 +488,36 @@
 <span id="more"></span>
 
 <h2 id="问题现象"><a href="#问题现象" class="headerlink" title="问题现象"></a>问题现象</h2><p>首先举一个传统C++中的<code>Pimpl</code>的例子</p>
-<pre><code class="c++">// widget.h
+<pre><code class="language-c++">// widget.h
 
 // 预先声明
 class Impl;
 
 class Widget
-&#123;
+{
     Impl * pImpl;
-&#125;;
+};
 </code></pre>
 <p>很简单，没什么问题，但是使用的是原始指针，现在我们升级到<code>std::unique_ptr</code></p>
-<pre><code class="c++">// widget.h
+<pre><code class="language-c++">// widget.h
 
 // 预先声明
 class Impl;
 
 class Widget
-&#123;
+{
     std::unique_ptr&lt;Impl&gt; pImpl;
-&#125;;
+};
 </code></pre>
 <p>很简单的一次升级，而且也能通过编译，看似也没问题，但当你创建一个<code>Widget</code>的实例</p>
-<pre><code class="C++">// pimpl.cpp
+<pre><code class="language-C++">// pimpl.cpp
 
 #include &quot;widget.h&quot;
 
 Widget w;
 </code></pre>
 <p>这时候，问题来了</p>
-<pre><code class="bash">$ g++ pimpl.cpp
+<pre><code class="language-bash">$ g++ pimpl.cpp
 In file included from /usr/include/c++/9/memory:80,
     from widget.h:1,
     from pimpl.cpp:1:
@@ -538,26 +532,26 @@ widget.h:5:7:   required from here
 </code></pre>
 <h2 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h2><p>从报错我们可以看出，<code>std::unique_ptr</code>中需要静态检测类型的大小<code>static_assert(sizeof(Impl)&gt;0</code>，但是我们的<code>Impl</code>是一个预先声明的类型，是<code>incomplete type</code>，也就没法计算，所以导致报错。</p>
 <p>想要知道怎么解决，首先需要知道<code>std::unique_ptr</code>为啥需要计算这个，我们来看一下STL中相关的源码，从报错中得知是<code>unique_ptr.h</code>的292行，调用了79行，我们把前后相关源码都粘出来（来自<code>g++ 9.3.0</code>中的实现）</p>
-<pre><code class="c++">// 292行附近
+<pre><code class="language-c++">// 292行附近
 
       /// Destructor, invokes the deleter if the stored pointer is not null.
       ~unique_ptr() noexcept
-      &#123;
-    static_assert(__is_invocable&lt;deleter_type&amp;, pointer&gt;::value,
-              &quot;unique_ptr&#39;s deleter must be invocable with a pointer&quot;);
-    auto&amp; __ptr = _M_t._M_ptr();
-    if (__ptr != nullptr)
+      {
+	static_assert(__is_invocable&lt;deleter_type&amp;, pointer&gt;::value,
+		      &quot;unique_ptr&#39;s deleter must be invocable with a pointer&quot;);
+	auto&amp; __ptr = _M_t._M_ptr();
+	if (__ptr != nullptr)
 // 292行在这里
-      get_deleter()(std::move(__ptr));
-    __ptr = pointer();
-      &#125;
+	  get_deleter()(std::move(__ptr));
+	__ptr = pointer();
+      }
 
 // 79行附近
 
   /// Primary template of default_delete, used by unique_ptr
   template&lt;typename _Tp&gt;
     struct default_delete
-    &#123;
+    {
       /// Default constructor
       constexpr default_delete() noexcept = default;
 
@@ -567,21 +561,21 @@ widget.h:5:7:   required from here
        * only if @p _Up* is convertible to @p _Tp*.
        */
       template&lt;typename _Up, typename = typename
-           enable_if&lt;is_convertible&lt;_Up*, _Tp*&gt;::value&gt;::type&gt;
-        default_delete(const default_delete&lt;_Up&gt;&amp;) noexcept &#123; &#125;
+	       enable_if&lt;is_convertible&lt;_Up*, _Tp*&gt;::value&gt;::type&gt;
+        default_delete(const default_delete&lt;_Up&gt;&amp;) noexcept { }
 
       /// Calls @c delete @p __ptr
       void
       operator()(_Tp* __ptr) const
-      &#123;
-    static_assert(!is_void&lt;_Tp&gt;::value,
-              &quot;can&#39;t delete pointer to incomplete type&quot;);
+      {
+	static_assert(!is_void&lt;_Tp&gt;::value,
+		      &quot;can&#39;t delete pointer to incomplete type&quot;);
 // 79行在这里
-    static_assert(sizeof(_Tp)&gt;0,
-              &quot;can&#39;t delete pointer to incomplete type&quot;);
-    delete __ptr;
-      &#125;
-    &#125;;
+	static_assert(sizeof(_Tp)&gt;0,
+		      &quot;can&#39;t delete pointer to incomplete type&quot;);
+	delete __ptr;
+      }
+    };
 </code></pre>
 <p><code>std::unique_ptr</code>中的析构函数，调用了默认的删除器<code>default_delete</code>，而<code>default_delete</code>中检查了<code>Impl</code>，其实就算<code>default_delete</code>中不检查，到下一步<code>delete __ptr;</code>，还是会出问题，因为不完整的类型无法被<code>delete</code>。</p>
 <h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>原因已经知道了，那么解决方法就呼之欲出了，这里提供三种解决方法：</p>
@@ -592,30 +586,30 @@ widget.h:5:7:   required from here
 </ul>
 <p>其中我最推荐方法三，它不改变代码需求，且仅做一点最小的改动，下面依次分析</p>
 <h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h3><p><strong>改用<code>std::shared_ptr</code></strong></p>
-<pre><code class="c++">// widget.h
+<pre><code class="language-c++">// widget.h
 
 // 预先声明
 class Impl;
 
 class Widget
-&#123;
+{
     std::shared_ptr&lt;Impl&gt; pImpl;
-&#125;;
+};
 </code></pre>
 <p>改完就能通过编译了，这种改法最简单。但是缺点也很明显：使用<code>shared_ptr</code>可能会改变项目的需求，<code>shared_ptr</code>也会带来额外的性能开销，而且违反了“尽可能使用<code>unique_ptr</code>而不是<code>shared_ptr</code>”的原则（当然这个原则是我编的，哈哈）</p>
 <p>那为什么<code>unique_ptr</code>不能使用预先声明的<code>imcomplete type</code>，但是<code>shared_ptr</code>却可以？</p>
 <p>因为对于<code>unique_ptr</code>而言，删除器是类型的一部分：</p>
-<pre><code class="c++">  template&lt;typename _Tp, typename _Dp&gt;
+<pre><code class="language-c++">  template&lt;typename _Tp, typename _Dp&gt;
     class unique_ptr&lt;_Tp[], _Dp&gt;
 </code></pre>
 <p>这里的<code>_Tp</code>是<code>element_type</code>，<code>_Dp</code>是<code>deleter_type</code></p>
 <p>而<code>shared_ptr</code>却不是这样：</p>
-<pre><code class="c++">  template&lt;typename _Tp&gt;
+<pre><code class="language-c++">  template&lt;typename _Tp&gt;
     class shared_ptr : public __shared_ptr&lt;_Tp&gt;
 </code></pre>
 <p>那为什么<code>unique_ptr</code>的删除器是类型的一部分，而<code>shared_ptr</code>不是呢？</p>
 <p>答案是设计如此！哈哈，说了句废话。具体来说，删除器不是类型的一部分，使得你可以对同一种类型的<code>shared_ptr</code>，使用不同的自定义删除器</p>
-<pre><code class="c++">auto my_deleter = [](Impl * p) &#123;...&#125;;
+<pre><code class="language-c++">auto my_deleter = [](Impl * p) {...};
 
 std::shared_ptr&lt;Impl&gt; w1(new Impl, my_deleter);
 std::shared_ptr&lt;Impl&gt; w2(new Impl); // default_deleter
@@ -623,7 +617,7 @@ std::shared_ptr&lt;Impl&gt; w2(new Impl); // default_deleter
 w1 = w2; // It&#39;s OK!
 </code></pre>
 <p>看到了么，这里的两个智能指针<code>w1</code>和<code>w2</code>，虽然使用了不同的删除器，但他们是同一种类型，可以相互进行赋值等等操作。而<code>unique_ptr</code>却不能这么玩</p>
-<pre><code class="c++">auto my_deleter = [](Impl * p) &#123;...&#125;;
+<pre><code class="language-c++">auto my_deleter = [](Impl * p) {...};
 
 std::unique_ptr&lt;Impl, decltype(my_deleter)&gt; w1(new Impl, my_deleter);
 std::unique_ptr&lt;Impl&gt; w2(new Impl); // default_deleter
@@ -636,87 +630,87 @@ w1 = std::move(w2); // 错误！类型不同，没有重载operator=
 <p>道理我都明白了，那为什么要让这两种智能指针有这样的区别啊？</p>
 <p>答案还是设计如此！哈哈，具体来说<code>unique_ptr</code>本身就只是对原始指针的简单封装，这样做不会带来额外的性能开销。而<code>shared_ptr</code>的实现提高了灵活性，但却进一步增大了性能开销。针对不同的使用场景所以有这样的区别。</p>
 <h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><p><strong>自定义删除器，将<code>delete pImpl</code>的操作，放到<code>widget.cpp</code>源文件中</strong></p>
-<pre><code class="c++">// widget.h
+<pre><code class="language-c++">// widget.h
 
 // 预先声明
 class Impl;
 
 class Widget
-&#123;
+{
     struct ImplDeleter final
-    &#123;
+    {
         constexpr ImplDeleter() noexcept = default;
         void operator()(Impl *p) const;
-    &#125;;
+    };
     std::unique_ptr&lt;Impl, ImplDeleter&gt; pImpl = nullptr;
-&#125;;
+};
 </code></pre>
 <p>然后在源文件<code>widget.cpp</code>中</p>
-<pre><code class="c++">#include &quot;widget.h&quot;
+<pre><code class="language-c++">#include &quot;widget.h&quot;
 #include &quot;impl.h&quot;
 
 void Widget::ImplDeleter::operator()(Impl *p) const
-&#123;
+{
     delete p;
-&#125;
+}
 </code></pre>
 <p>这种方法改起来也不复杂，但是弊端也很明显，<code>std::make_unique</code>没法使用了，只能自己手动<code>new</code>，直接看源码吧</p>
-<pre><code class="c++">  template&lt;typename _Tp, typename... _Args&gt;
+<pre><code class="language-c++">  template&lt;typename _Tp, typename... _Args&gt;
     inline typename _MakeUniq&lt;_Tp&gt;::__single_object
     make_unique(_Args&amp;&amp;... __args)
-    &#123; return unique_ptr&lt;_Tp&gt;(new _Tp(std::forward&lt;_Args&gt;(__args)...)); &#125;
+    { return unique_ptr&lt;_Tp&gt;(new _Tp(std::forward&lt;_Args&gt;(__args)...)); }
 </code></pre>
 <p>看出问题在哪了么？这里返回的是默认删除器类型的<code>unique_ptr</code>，即<code>std::unique_ptr&lt;Impl, std::default_delete&lt;Impl&gt;&gt;</code>，如<a href="#%E6%96%B9%E6%B3%95%E4%B8%80">方法一</a>中所说，是不同删除器类型的<code>unique_ptr</code>是没法相互赋值的，也就是说：</p>
-<pre><code class="c++">pImpl = std::make_unique&lt;Impl&gt;(); // 错误！类型不同，没有重载operator=
+<pre><code class="language-c++">pImpl = std::make_unique&lt;Impl&gt;(); // 错误！类型不同，没有重载operator=
 
 pImpl = std::unique_ptr&lt;Impl, ImplDeleter&gt;(new Impl); // 正确！每次你都要写这么一大串
 </code></pre>
 <p>当然你也可以实现一个<code>make_impl</code>，并且<code>using</code>一下这个很长的类型，比如：</p>
-<pre><code class="c++">using unique_impl = std::unique_ptr&lt;Impl, ImplDeleter&gt;;
+<pre><code class="language-c++">using unique_impl = std::unique_ptr&lt;Impl, ImplDeleter&gt;;
 
 template&lt;typename... Ts&gt;
 unique_impl make_impl(Ts &amp;&amp; ...args)
-&#123;
+{
     return unique_impl(new Impl(std::forward&lt;Ts&gt;(args)...));
-&#125;
+}
 
 // 调用
 pImpl = make_impl();
 </code></pre>
 <p>看似还凑合，但总的来说，这样做还是感觉很麻烦。并且有一个很头疼的问题：<code>make_impl</code>作为函数模板，没法声明和定义分离，而且其中的用到了<code>new</code>，需要完整的<code>Impl</code>类型。所以，你只能把这一段模板函数写在源文件中，emmm，总感觉不太对劲。</p>
 <h3 id="方法三"><a href="#方法三" class="headerlink" title="方法三"></a>方法三</h3><p><strong>仅声明<code>Widget</code>的析构函数，但不要在<code>widget.h</code>头文件中实现它</strong></p>
-<pre><code class="c++">// widget.h
+<pre><code class="language-c++">// widget.h
 
 // 预先声明
 class Impl;
 
 class Widget
-&#123;
+{
     Widget();
     ~Widget();  // 仅声明
 
     std::unique_ptr&lt;Impl&gt; pImpl;
-&#125;;
+};
 </code></pre>
-<pre><code class="c++">// widget.cpp
+<pre><code class="language-c++">// widget.cpp
 #include &quot;widget.h&quot;
 #include &quot;impl.h&quot;
 
 Widget::Widget()
     : pImpl(nullptr)
-&#123;&#125;
+{}
 
 Widget::~Widget() = default;    // 在这里定义
 </code></pre>
 <p>这样就解决了！是不是出乎意料的简单！并且你也可以正常的使用<code>std::make_unique</code>来进行赋值。唯一的缺点就是你没法在头文件中初始化<code>pImpl</code>了</p>
 <p>但也有别的问题，因为不光是析构函数中需要析构<code>std::unique_ptr</code>，还有别的也需要，比如移动构造、移动运算符等。所以在移动构造、移动运算符中，你也会遇到同样的编译错误。解决方法也很简单，同上面一样：</p>
-<pre><code class="c++">// widget.h
+<pre><code class="language-c++">// widget.h
 
 // 预先声明
 class Impl;
 
 class Widget
-&#123;
+{
     Widget();
     ~Widget();
 
@@ -724,15 +718,15 @@ class Widget
     Widget&amp; operator=(Widget&amp;&amp; rhs);
 
     std::unique_ptr&lt;Impl&gt; pImpl;
-&#125;;
+};
 </code></pre>
-<pre><code class="c++">// widget.cpp
+<pre><code class="language-c++">// widget.cpp
 #include &quot;widget.h&quot;
 #include &quot;impl.h&quot;
 
 Widget::Widget()
     : pImpl(nullptr)
-&#123;&#125;
+{}
 
 Widget::~Widget() = default;
 
