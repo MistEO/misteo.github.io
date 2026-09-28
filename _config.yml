@@ -41,7 +41,7 @@ filename_case: 0
 render_drafts: false
 post_asset_folder: false
 relative_link: false
-future: true
+future: false
 syntax_highlighter: highlight
 highlight:
   enable: false
@@ -68,7 +68,7 @@ category_map:
 tag_map:
 
 # Metadata elements
-meta_generator: true
+meta_generator: false
 
 # Date / Time format
 date_format: YYYY-MM-DD

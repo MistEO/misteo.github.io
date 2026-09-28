@@ -18,9 +18,9 @@ head:
 
 # Jump Links Settings
 url:
-    rss:
-    daily_pic: "#"
-    logo: "#"
+    rss: /atom.xml
+    daily_pic:
+    logo: /
 
 
 # ---------------------------------------------------------------
@@ -83,13 +83,11 @@ img:
 # Custom Fonts
 #    family: the font-family which will be used in the theme
 #    use: uri of fonts host.
-#        Available value: google | baomitu | ustc | custom | catnet
-#        - When you set as 'custom', you should fill in the value of 'custom_font_host', which should be a mirror of google fonts.
-#        - If you have setup your custom font-family, don't forget to add style tag with @font-face or link.tag with font css
-#          to /source/data/head.yml as custom code, to load custom font files.
+#        Available value: system | google | baomitu | ustc | custom | catnet
+#        system 使用本机字体，不请求 Google Fonts。
 fonts:
-    family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif
-    use: google
+    family: '"Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif'
+    use: system
     custom_font_host:
 
 # Card Elevation Level
@@ -98,7 +96,7 @@ card_elevation: 2
 # Copyright
 # Specify the date when the site was setup.
 #    For example, if you set it as 2015, then footer will show '© 2015 - 2017'
-copyright_since:
+copyright_since: 2018
 
 # Footer Text
 # You can specify the text you want to show in footer, HTML tag is supported.
@@ -227,39 +225,13 @@ sidebar:
 # Integrated Services
 # ---------------------------------------------------------------
 
-# Comment Systems
-# Available value of "use":
-#     disqus | disqus_click | changyan | livere | gitment | gitalk | valine
-# If you want to use gitment or gitalk,you should get the client_id and client_secret form https://github.com/settings/applications/new
-# If you want to use valine,you should get the app_id and app_key form https://leancloud.cn ,more setting please see https://valine.js.org
+# Comment system. Gitment / Valine / 多说 / 畅言 已停用。
 comment:
     use: giscus
-    shortname: # duoshuo or disqus shortname
-    changyan_appid:
-    changyan_conf:
-    changyan_thread_key_type: path
-    livere_data_uid:
-    gitment_repo:
-    gitment_owner:
-    gitment_client_id:
-    gitment_client_secret:
     giscus_repo: MistEO/misteo.github.io
     giscus_repo_id: MDEwOlJlcG9zaXRvcnkxMjQxOTEwNTU=
     giscus_category: Announcements
-    giscus_category_id: DIC_kwDOB2cBT84DGkcC 
-    valine_leancloud_appId:  # leancloud application app id
-    valine_leancloud_appKey:  # leancloud application app key
-    valine_notify: false # valine mail notify (true/false) https://github.com/xCss/Valine/wiki
-    valine_verify: false # valine verify code (true/false)
-    valine_pageSize: 10 # comment list page size
-    valine_avatar: identicon # gravatar style https://valine.js.org/#/avatar
-    valine_lang: zh-cn # i18n
-    valine_placeholder: Just go go # valine comment input placeholder(like: Please leave your footprints )
-    valine_guest_info: nick,mail,link #valine comment header info
-    gitalk_repo: # git repo of the hexo
-    gitalk_owner: # git repo's owner
-    gitalk_client_id: # github app client id 
-    gitalk_client_secret: # github app client secret
+    giscus_category_id: DIC_kwDOB2cBT84DGkcC
 
 # Search Systems
 # Available value:
@@ -288,7 +260,7 @@ busuanzi:
     enable: false
     all_site_uv: false
     post_pv: false
-    busuanzi_pure_mini_js: "https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"
+    busuanzi_pure_mini_js: "https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
 
 # Files Vendors
 # Set a CDN for the files src you want to customize. The url should with protocol.
