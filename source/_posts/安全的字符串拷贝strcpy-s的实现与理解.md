@@ -7,7 +7,7 @@ tags:
     - 算法
 ---
 
-在C标准库中提供了字符串拷贝函数`strcpy`，而微软则为为它提供了一个更安全的版本`strcpy_s`，其函数原型为
+在C标准库中提供了字符串拷贝函数`strcpy`，而微软则为它提供了一个更安全的版本`strcpy_s`，其函数原型为
 
 ```c++
 errno_t __cdecl strcpy_s(
@@ -99,7 +99,7 @@ errno_t __cdecl _FUNC_NAME(_CHAR *_DEST, size_t _SIZE, const _CHAR *_SRC)
 
 首先明确一点，多出来的参数`size_t _SIZE`需要传入目的地址可用长度，即`_DEST`的可用长度
 
-实现中多了几个宏定义，我们先**猜一下**他们是干嘛的，然后带着疑问往下看。
+实现中多了几个宏定义，我们先**猜一下**它们是干嘛的，然后带着疑问往下看。
 
 不感兴趣的同学也可以跳过这一章，直接看后面的[分析结论](#分析结论)
 
@@ -121,7 +121,7 @@ errno_t __cdecl _FUNC_NAME(_CHAR *_DEST, size_t _SIZE, const _CHAR *_SRC)
 1. 先两个`_VALIDATE`宏，验证目的字符串和源字符串的合法性
 2. 开始逐字符拷贝，如果正常拷到`'\0'`，或者`available`跑完了，就停止
 3. 如果2.中是`available`跑完了，说明SRC的长度超过了SIZE，即超过了目的字符串最大可用长度。拷贝失败了，重置DEST，整理错误信息，return错误码。
-4. 正常拷到`'\0'`，就把DEST剩余的后半部分`[_SIZE - available + 1, _Size)`全填充为某个比较安全的值。
+4. 正常拷到`'\0'`，就把DEST剩余的后半部分`[_SIZE - available + 1, _SIZE)`全填充为某个比较安全的值。
 5. return 0 结束。
 
 下面逐个分析下这些宏，为了便于理解，我整理了一下，不要在意定义的先后顺序~
@@ -202,15 +202,15 @@ _VALIDATE_STRING(_DEST, _SIZE);
 #define _CALL_INVALID_PARAMETER(expr) _invalid_parameter(expr, __FUNCTIONW__, __FILEW__, __LINE__, 0)
 ```
 
-`_INVALID_PARAMETER`说实话我真没太看明白在干嘛，继续追踪后来会到`invarg.c`中，套娃套的太多了，看不过来了。。获取了`__FUNCTION__`、`__LINE__`等，估计是记录错误，可能在VS的调试器等中有体现，有兴趣的同学也自行也就看下吧
+`_INVALID_PARAMETER`说实话我真没太看明白在干嘛，继续追踪后来会到`invarg.c`中，套娃套的太多了，看不过来了。。获取了`__FUNCTION__`、`__LINE__`等，估计是记录错误，可能在VS的调试器等中有体现，有兴趣的同学也自行看一下吧
 
 #### 小结（-VALIDATE-STRING）
 
-总结一下，就是检查`(_DEST != NULL && _Size > 0)`，不满足的话，赋值errno，并直接返回错误码，（_DEBUG模式下，还会弹窗提示，并触发调试断点）。简单实现如下
+总结一下，就是检查`(_DEST != NULL && _SIZE > 0)`，不满足的话，赋值errno，并直接返回错误码，（_DEBUG模式下，还会弹窗提示，并触发调试断点）。简单实现如下
 
 ```c++
 // Same like _VALIDATE_STRING(_DEST, _SIZE);
-if (_DEST == NULL || _Size <= 0)
+if (_DEST == NULL || _SIZE <= 0)
 {
     errno = EINVAL;
     return EINVAL;
@@ -237,7 +237,7 @@ _VALIDATE_POINTER_RESET_STRING(_SRC, _DEST, _SIZE);
     }
 ```
 
-如果`_SRC`为`NULL`，才进行`_RESET_STRING`和`_VALIDATE_POINTER_ERROR_RETURN`的操作，就是如果源字符串NULL，直接把目的字符串重置，然后返回验证一个什么值并返回
+如果`_SRC`为`NULL`，才进行`_RESET_STRING`和`_VALIDATE_POINTER_ERROR_RETURN`的操作，就是如果源字符串NULL，直接把目的字符串重置，然后校验并返回
 
 ```c++
 // from internal_securecrt.h
@@ -286,7 +286,7 @@ _VALIDATE_POINTER_RESET_STRING(_SRC, _DEST, _SIZE);
 extern "C" size_t __crtDebugFillThreshold = SIZE_MAX;
 ```
 
-这里比较巧妙，重置字符串，一般情况下仅将_DSET首个char的值赋值 `*(_DEST) = 0;`；DEBUG模式下才`_FILL_STRING`，其中还用`_SECURECRT_FILL_BUFFER_THRESHOLD`长度判断，还是跟着DEBUG走的，用memset将后面剩下的char赋值为254。后面在`_FILL_STRING`章节详细论述一下这个
+这里比较巧妙，重置字符串，一般情况下仅将_DEST首个char的值赋值 `*(_DEST) = 0;`；DEBUG模式下才`_FILL_STRING`，其中还用`_SECURECRT_FILL_BUFFER_THRESHOLD`长度判断，还是跟着DEBUG走的，用memset将后面剩下的char赋值为254。后面在`_FILL_STRING`章节详细论述一下这个
 
 ```c++
 // from internal_securecrt.h
@@ -421,9 +421,9 @@ extern "C" size_t __crtDebugFillThreshold = SIZE_MAX;
 ```c++
 // Same like _FILL_STRING(_DEST, _SIZE, _OFFSET);
 #ifdef _DEBUG
-    if (_OFFSET < _Size)
+    if (_OFFSET < _SIZE)
     {
-        memset(_DEST + _OFFSET, 0xFE, (_Size - _Offset) * sizeof(char));
+        memset(_DEST + _OFFSET, 0xFE, (_SIZE - _OFFSET) * sizeof(char));
     }
 #else
 // Do nothing;
@@ -479,13 +479,13 @@ errno_t __cdecl _FUNC_NAME(_CHAR *_DEST, size_t _SIZE, const _CHAR *_SRC)
 }
 ```
 
-1. `_VALIDATE_STRING(_DEST, _SIZE);` 检验`_DEST != NULL && _Size > 0`是否满足；若为假，则`errno = EINVAL`，并直接`return EINVAL`；如果是在Debug模式下（`_DEBUG`宏被定义过）还会弹出提示窗口、触发调试断点、记录下错误发生位置等
+1. `_VALIDATE_STRING(_DEST, _SIZE);` 检验`_DEST != NULL && _SIZE > 0`是否满足；若为假，则`errno = EINVAL`，并直接`return EINVAL`；如果是在Debug模式下（`_DEBUG`宏被定义过）还会弹出提示窗口、触发调试断点、记录下错误发生位置等
 2. `_VALIDATE_POINTER_RESET_STRING(_SRC, _DEST, _SIZE);` 判断`_SRC == NULL`是否满足；若为真，则Reset `_DEST`，`errno = EINVAL`，并直接`return EINVAL`，Debug模式下也同样弹窗、断点、错误等
 3. 算法逻辑：与分析中的没有区别，逐字符拷贝，如果正常拷到`'\0'`，或者`available`跑完了，就停止
 4. 如果`available == 0`，说明`_SRC`的长度超过了`_SIZE`，即超过了目的字符串最大可用长度，拷贝失败。
 5. `_RESET_STRING(_DEST, _SIZE);` 重置字符串，`*_DEST = 0;`，且`_FILL_STRING(_DEST, _SIZE, 1);`。即将首个字符赋值为`'\0'`，后面的字符填充安全字符`0xFE`。需要说明的是，`_FILL_STRING`也仅在Debug模式下才进行，否则什么也不处理
 6. `_RETURN_BUFFER_TOO_SMALL(_DEST, _SIZE);` `errno = ERANGE`，并直接`return ERANGE`，Debug模式下也同样弹窗、断点、错误等
-7. `_FILL_STRING(_DEST, _SIZE, _SIZE - available + 1);`就是调用`memset`，将`_DEST`比`_SRC`多出来的部分（`[_SIZE - available + 1, _Size)`）全部填充为安全字符`0xFE`。同样，`_FILL_STRING`也仅在Debug模式下才进行，否则什么也不处理
+7. `_FILL_STRING(_DEST, _SIZE, _SIZE - available + 1);`就是调用`memset`，将`_DEST`比`_SRC`多出来的部分（`[_SIZE - available + 1, _SIZE)`）全部填充为安全字符`0xFE`。同样，`_FILL_STRING`也仅在Debug模式下才进行，否则什么也不处理
 
 可能有点绕，接着看下一章节简化实现应该就清晰了~
 
@@ -501,7 +501,7 @@ errno_t strcpy_s(char *_DEST, size_t _SIZE, const char *_SRC)
     char *p;
     size_t available;
 
-    if (!(_DEST != NULL && _Size > 0))
+    if (!(_DEST != NULL && _SIZE > 0))
     {
         errno = EINVAL;
         return EINVAL;
@@ -546,7 +546,7 @@ inline void fill_string(char * string, size_t size, size_t offset)
 
 ## 扩展延伸
 
-既然讲完了`strcpy_s`，那其他的字符串操作函数的`_safe`版本呢？下面再看下`strcat_s`和`strset_s`。也不多啰嗦了，直接粘出没见过的宏的实现，然后我们在写个简化实现看下~
+既然讲完了`strcpy_s`，那其他的字符串操作函数的`_safe`版本呢？下面再看下`strcat_s`和`strset_s`。也不多啰嗦了，直接粘出没见过的宏的实现，然后再写个简化实现看下~
 
 ### `strcat_s`
 
@@ -618,7 +618,7 @@ errno_t strcat_s(char *_DEST, size_t _SIZE, const char *_SRC)
     char *p;
     size_t available;
 
-    if (!(_DEST != NULL && _Size > 0))
+    if (!(_DEST != NULL && _SIZE > 0))
     {
         errno = EINVAL;
         return EINVAL;
@@ -672,6 +672,7 @@ inline void fill_string(char * string, size_t size, size_t offset)
     // do nothing
     ;
 #endif
+}
 ```
 
 ### `strset_s`
@@ -723,7 +724,7 @@ errno_t strset_s(char *_DEST, size_t _SIZE, int _Value)
     char *p;
     size_t available;
 
-    if (!(_DEST != NULL && _Size > 0))
+    if (!(_DEST != NULL && _SIZE > 0))
     {
         errno = EINVAL;
         return EINVAL;

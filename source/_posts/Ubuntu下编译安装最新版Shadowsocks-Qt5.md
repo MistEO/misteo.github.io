@@ -8,7 +8,7 @@ tags:
 thumbnail: /post_images/ss.png
 ---
 
-既然说好的打造技术博客，总得写点干货什么的，正好前些日子买个了新的ss服务，买完才注意到加密方式是`chacha20-ietf-poly1305`，再一看Shadowsocks-Qt5在Ubuntu的软件源里面最新版本只是2.9，不支持啊，于是只能自己研究一下怎么弄了，遇到了不少坑，和大家分享一下经验方法。
+既然说好的打造技术博客，总得写点干货什么的，正好前些日子买了个新的ss服务，买完才注意到加密方式是`chacha20-ietf-poly1305`，再一看Shadowsocks-Qt5在Ubuntu的软件源里面最新版本只是2.9，不支持啊，于是只能自己研究一下怎么弄了，遇到了不少坑，和大家分享一下经验方法。
 
 <!-- more -->
 
@@ -26,7 +26,7 @@ sudo apt-get install libsodium-dev
 
 ## 安装`libbotan-2.x`
 
-下载解压编译安装，没啥好说的，可以访问[Botan-Index of release](https://botan.randombit.net/releases/) 获取最新本版，虽说新版本好像也没啥用XD
+下载解压编译安装，没啥好说的，可以访问[Botan-Index of release](https://botan.randombit.net/releases/) 获取最新版本，虽说新版本好像也没啥用XD
 
 ```bash
 wget https://botan.randombit.net/releases/Botan-2.3.0.tgz
@@ -136,7 +136,7 @@ ss-qt5
 可以写个sh，放到桌面双击启动
 
 ```bash
-#/bin/bash
+#!/bin/bash
 export LD_LIBRARY_PATH=/opt/Qt5.10.0/5.10.0/gcc_64/lib
 ss-qt5
 ```
@@ -169,7 +169,7 @@ sudo pip install https://github.com/shadowsocks/shadowsocks/archive/master.zip -
 sslocal -c xxx.json
 ```
 
-想让命令走ss推荐使用`porxychains`，具体使用方法可以Google一下不再赘述
+想让命令走ss，推荐使用`proxychains`，具体使用方法可以Google一下不再赘述
 
 ## 参考资料
 

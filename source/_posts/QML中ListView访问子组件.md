@@ -47,13 +47,13 @@ ListView {
 
 ### spacing带来的问题
 
-不知道`spacing`具体的实现是什么，类似于给列表加上一些有长宽的`Item`或者什么的，这都不是重点，重点是加上的这些`Item`之后循环访问会出现问题，所以需要判断一下，举个例子：
+不知道`spacing`具体的实现是什么，类似于给列表加上一些有长宽的`Item`或者什么的，这都不是重点，重点是加上这些`Item`之后，循环访问会出现问题，所以需要判断一下，举个例子：
 
 ```js
 var children = listview.contentItem.children;
 for (var i = 0; i !== children.length; ++i) {
     if (typeof children[i].getText !== "function") {
-    // 或者 === "undefined"
+        // 或者 typeof children[i].getText === "undefined"
         continue;
     }
     allText.push(children[i].getText());

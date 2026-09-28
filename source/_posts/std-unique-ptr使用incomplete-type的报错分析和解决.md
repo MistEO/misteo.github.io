@@ -69,7 +69,7 @@ widget.h:5:7:   required from here
 
 ## 原因分析
 
-从报错我们可以看出，`std::unique_ptr`中需要静态检测类型的大小`static_assert(sizeof(Impl)>0`，但是我们的`Impl`是一个预先声明的类型，是`incomplete type`，也就没法计算，所以导致报错。
+从报错我们可以看出，`std::unique_ptr`中需要静态检测类型的大小`static_assert(sizeof(Impl) > 0)`，但是我们的`Impl`是一个预先声明的类型，是`incomplete type`，也就没法计算，所以导致报错。
 
 想要知道怎么解决，首先需要知道`std::unique_ptr`为啥需要计算这个，我们来看一下STL中相关的源码，从报错中得知是`unique_ptr.h`的292行，调用了79行，我们把前后相关源码都粘出来（来自`g++ 9.3.0`中的实现）
 
@@ -150,7 +150,7 @@ class Widget
 
 改完就能通过编译了，这种改法最简单。但是缺点也很明显：使用`shared_ptr`可能会改变项目的需求，`shared_ptr`也会带来额外的性能开销，而且违反了“尽可能使用`unique_ptr`而不是`shared_ptr`”的原则（当然这个原则是我编的，哈哈）
 
-那为什么`unique_ptr`不能使用预先声明的`imcomplete type`，但是`shared_ptr`却可以？
+那为什么`unique_ptr`不能使用预先声明的`incomplete type`，但是`shared_ptr`却可以？
 
 因为对于`unique_ptr`而言，删除器是类型的一部分：
 
@@ -181,7 +181,7 @@ std::shared_ptr<Impl> w2(new Impl); // default_deleter
 w1 = w2; // It's OK!
 ```
 
-看到了么，这里的两个智能指针`w1`和`w2`，虽然使用了不同的删除器，但他们是同一种类型，可以相互进行赋值等等操作。而`unique_ptr`却不能这么玩
+看到了么，这里的两个智能指针`w1`和`w2`，虽然使用了不同的删除器，但它们是同一种类型，可以相互进行赋值等等操作。而`unique_ptr`却不能这么玩
 
 ```c++
 auto my_deleter = [](Impl * p) {...};
@@ -241,7 +241,7 @@ void Widget::ImplDeleter::operator()(Impl *p) const
     { return unique_ptr<_Tp>(new _Tp(std::forward<_Args>(__args)...)); }
 ```
 
-看出问题在哪了么？这里返回的是默认删除器类型的`unique_ptr`，即`std::unique_ptr<Impl, std::default_delete<Impl>>`，如[方法一](#方法一)中所说，是不同删除器类型的`unique_ptr`是没法相互赋值的，也就是说：
+看出问题在哪了么？这里返回的是默认删除器类型的`unique_ptr`，即`std::unique_ptr<Impl, std::default_delete<Impl>>`，如[方法一](#方法一)中所说，不同删除器类型的`unique_ptr`没法相互赋值，也就是说：
 
 ```c++
 pImpl = std::make_unique<Impl>(); // 错误！类型不同，没有重载operator=
@@ -264,7 +264,7 @@ unique_impl make_impl(Ts && ...args)
 pImpl = make_impl();
 ```
 
-看似还凑合，但总的来说，这样做还是感觉很麻烦。并且有一个很头疼的问题：`make_impl`作为函数模板，没法声明和定义分离，而且其中的用到了`new`，需要完整的`Impl`类型。所以，你只能把这一段模板函数写在源文件中，emmm，总感觉不太对劲。
+看似还凑合，但总的来说，这样做还是感觉很麻烦。并且有一个很头疼的问题：`make_impl`作为函数模板，没法声明和定义分离，而且其中用到了`new`，需要完整的`Impl`类型。所以，你只能把这一段模板函数写在源文件中，emmm，总感觉不太对劲。
 
 ### 方法三
 
@@ -330,8 +330,8 @@ Widget::Widget()
 
 Widget::~Widget() = default;
 
-Widget(Widget&& rhs) = default;             //在这里定义
-Widget& operator=(Widget&& rhs) = default;
+Widget::Widget(Widget&& rhs) = default;     //在这里定义
+Widget& Widget::operator=(Widget&& rhs) = default;
 ```
 
 搞定！
