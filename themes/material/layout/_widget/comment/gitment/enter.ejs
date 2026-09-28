@@ -1,0 +1,24 @@
+<!-- 使用 gitcoment -->
+<div id="gitment-comment">
+    <%- partial('_widget/comment/' + theme.comment.use + '/main') %>
+</div>
+<style>
+    #gitment-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+<script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.css" />
+<script>
+    var gitment = new Gitment({
+        id: '<%= page.date %>', // 可选。默认为 location.href
+        owner: '<%= theme.comment.gitment_owner %>',
+        repo: '<%= theme.comment.gitment_repo %>',
+        oauth: {
+            client_id: '<%= theme.comment.gitment_client_id %>',
+            client_secret: '<%= theme.comment.gitment_client_secret %>',
+        },
+    })
+    gitment.render('container')
+</script>
