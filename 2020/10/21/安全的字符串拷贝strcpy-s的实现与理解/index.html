@@ -252,7 +252,7 @@ errno_t __cdecl strcpy_s(
 
     
         <meta property="article:published_time" content="Wed Oct 21 2020 15:29:00 GMT+0800">
-        <meta property="article:modified_time" content="Mon Sep 28 2026 19:35:05 GMT+0800">
+        <meta property="article:modified_time" content="Mon Sep 28 2026 19:44:08 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -275,7 +275,7 @@ errno_t __cdecl strcpy_s(
     "mainEntityOfPage": "https://misteo.top/2020/10/21/%E5%AE%89%E5%85%A8%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8B%B7%E8%B4%9Dstrcpy-s%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E7%90%86%E8%A7%A3/index.html",
     "headline": "安全的字符串拷贝strcpy_s的实现与理解",
     "datePublished": "Wed Oct 21 2020 15:29:00 GMT+0800",
-    "dateModified": "Mon Sep 28 2026 19:35:05 GMT+0800",
+    "dateModified": "Mon Sep 28 2026 19:44:08 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "MistEO",
@@ -534,7 +534,7 @@ char *strcpy (char *d, const char *s)
 }
 </code></pre>
 <p><del>没什么好说的，懂得都懂（笑</del></p>
-<p>逐地址拷贝，当<code>*d == &#39;\0&#39;</code>时，while循环退出结束拷贝，网上搜strcpy实现应该能找到很多详解，不赘述了</p>
+<p>逐地址拷贝，<code>&#39;\0&#39;</code>被赋进去之后，while的条件变成0，循环才结束。因为是后置<code>++</code>，这时候<code>d</code>已经指到<code>&#39;\0&#39;</code>后面了，不能理解成「看到<code>*d == &#39;\0&#39;</code>就退出、这个字节还没拷」。网上搜strcpy实现应该能找到很多详解，不赘述了</p>
 <h3 id="微软strcpy-s的实现"><a href="#微软strcpy-s的实现" class="headerlink" title="微软strcpy_s的实现"></a>微软<code>strcpy_s</code>的实现</h3><pre><code class="language-c++">// from C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\crt\src\tcscpy_s.inl
 
 /***

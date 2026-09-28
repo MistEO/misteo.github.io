@@ -238,7 +238,7 @@
 
     
         <meta property="article:published_time" content="Thu Mar 08 2018 11:17:35 GMT+0800">
-        <meta property="article:modified_time" content="Mon Sep 28 2026 19:35:05 GMT+0800">
+        <meta property="article:modified_time" content="Mon Sep 28 2026 19:44:08 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -261,7 +261,7 @@
     "mainEntityOfPage": "https://misteo.top/2018/03/08/Ubuntu%E4%B8%8B%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85%E6%9C%80%E6%96%B0%E7%89%88Shadowsocks-Qt5/index.html",
     "headline": "Ubuntu下源码编译安装最新版Shadowsocks-Qt5",
     "datePublished": "Thu Mar 08 2018 11:17:35 GMT+0800",
-    "dateModified": "Mon Sep 28 2026 19:35:05 GMT+0800",
+    "dateModified": "Mon Sep 28 2026 19:44:08 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "MistEO",
@@ -484,8 +484,9 @@ make
 sudo make install
 sudo ldconfig
 </code></pre>
-<h2 id="安装libQtShadowsocks"><a href="#安装libQtShadowsocks" class="headerlink" title="安装libQtShadowsocks"></a>安装<code>libQtShadowsocks</code></h2><pre><code class="language-bash">sudo apt-get install qt5-qmake qtbase5-dev libqrencode-dev libqtshadowsocks-dev libappindicator-dev libzbar-dev libbotan1.10-dev
+<h2 id="安装libQtShadowsocks"><a href="#安装libQtShadowsocks" class="headerlink" title="安装libQtShadowsocks"></a>安装<code>libQtShadowsocks</code></h2><pre><code class="language-bash">sudo apt-get install qt5-qmake qtbase5-dev libqrencode-dev libappindicator-dev libzbar-dev
 git clone https://github.com/shadowsocks/libQtShadowsocks.git
+cd libQtShadowsocks
 mkdir build
 cd build
 cmake ..
@@ -493,10 +494,7 @@ make
 sudo make install
 sudo ldconfig
 </code></pre>
-<p>如果软件源中没有libqtshadowsocks-dev，可以使用pip安装</p>
-<pre><code class="language-bash">sudo apt-get install python-pip
-sudo pip install shadowsocks
-</code></pre>
+<p>软件源里的<code>libqtshadowsocks-dev</code>是配<code>libbotan1.10</code>的旧包，不支持前面要的 AEAD，也不能用<code>pip install shadowsocks</code>来代替。那个 pip 包装的是 Python 版 shadowsocks，和这个 C++ 库不是同一个东西。上面已经装过 Botan 2，这里就不要再装<code>libbotan1.10-dev</code>了，两套 Botan 会搅在一起。</p>
 <p>如果原先安装过Qt，可能会提示找不到Qt目录，导入环境变量，然后重新编译安装</p>
 <pre><code class="language-bash">export LD_LIBRARY_PATH=/opt/Qt5.10.0/5.10.0/gcc_64/lib/
 rm -rf *    #删除build文件夹中文件
@@ -505,7 +503,7 @@ make
 sudo make install
 sudo ldconfig
 </code></pre>
-<h2 id="安装Shadowsocks-Qt5"><a href="#安装Shadowsocks-Qt5" class="headerlink" title="安装Shadowsocks-Qt5"></a>安装<code>Shadowsocks-Qt5</code></h2><pre><code class="language-bash">sudo apt-get install qt5-qmake qtbase5-dev libqrencode-dev libqtshadowsocks-dev libappindicator-dev libzbar-dev libbotan1.10-dev
+<h2 id="安装Shadowsocks-Qt5"><a href="#安装Shadowsocks-Qt5" class="headerlink" title="安装Shadowsocks-Qt5"></a>安装<code>Shadowsocks-Qt5</code></h2><pre><code class="language-bash">sudo apt-get install qt5-qmake qtbase5-dev libqrencode-dev libappindicator-dev libzbar-dev
 git clone https://github.com/shadowsocks/shadowsocks-qt5.git
 cd shadowsocks-qt5
 mkdir build

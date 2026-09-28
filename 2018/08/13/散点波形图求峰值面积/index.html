@@ -238,7 +238,7 @@
 
     
         <meta property="article:published_time" content="Mon Aug 13 2018 17:17:05 GMT+0800">
-        <meta property="article:modified_time" content="Mon Sep 28 2026 19:35:05 GMT+0800">
+        <meta property="article:modified_time" content="Mon Sep 28 2026 19:44:08 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -261,7 +261,7 @@
     "mainEntityOfPage": "https://misteo.top/2018/08/13/%E6%95%A3%E7%82%B9%E6%B3%A2%E5%BD%A2%E5%9B%BE%E6%B1%82%E5%B3%B0%E5%80%BC%E9%9D%A2%E7%A7%AF/index.html",
     "headline": "散点波形图求峰值面积比",
     "datePublished": "Mon Aug 13 2018 17:17:05 GMT+0800",
-    "dateModified": "Mon Sep 28 2026 19:35:05 GMT+0800",
+    "dateModified": "Mon Sep 28 2026 19:44:08 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "MistEO",
@@ -511,34 +511,30 @@
 <pre><code class="language-c++">std::vector&lt;double&gt; derivative(const std::vector&lt;double&gt;&amp; data, const int h_value)
 {
     std::vector&lt;double&gt; dst;
-    for (int x = 2 * h_value; x != data.size() - (2 * h_value); ++x) {
-        double fx = (-data.at(x + 2 * h_value) + 8 * data.at(x + h_value) - 8 * data.at(x - h_value) + data.at(x - 2 * h_value)) / (12 * h_value);
+    int n = static_cast&lt;int&gt;(data.size());
+    for (int x = 2 * h_value; x &lt; n - 2 * h_value; ++x) {
+        double fx = (-data.at(x + 2 * h_value) + 8 * data.at(x + h_value) - 8 * data.at(x - h_value) + data.at(x - 2 * h_value)) / (12.0 * h_value);
         dst.push_back(fx);
     }
     return dst;
 }
 </code></pre>
-<p>这里没有对前后<code>2*h_value</code>进行计算，可以使用<code>向前差分</code>和<code>向后差分</code>进行完整的散点导数计算，由于我们的项目不需要，所以不再赘述</p>
+<p>这里没有对前后<code>2*h_value</code>进行计算，可以使用<code>向前差分</code>和<code>向后差分</code>补上。由于我们的项目不需要，所以不再赘述。导数数组因此比原散点短，下标<code>i</code>对应原数组的<code>i + 2 * h_value</code>。后面算面积要把这个偏移加回去，不能直接拿导数下标去原数组里取</p>
 <p><em>上面是重新调整参数后的平滑曲线，下面是已经平滑过的导函数曲线</em><br><img src="/post_images/crest_3.png" alt="导函数曲线"></p>
 <h2 id="散点导平滑"><a href="#散点导平滑" class="headerlink" title="散点导平滑"></a>散点导平滑</h2><p>没什么好说的，将导数的数据再次进行平滑即可</p>
-<h2 id="求极值"><a href="#求极值" class="headerlink" title="求极值"></a>求极值</h2><p>由于我们求出来的是散点导数，而不是导数方程，所以直接通过<code>f&#39;(x) == 0</code>判断并不合适（因为散点并不一定落在x轴上），但是导数点一定是两边异号，这样也就很好判断了，通过<code>f&#39;(x-x0) * f&#39;(x) &lt;= 0</code>即可。</p>
-<pre><code class="language-c++">std::vector&lt;double&gt; extremum(const std::vector&lt;double&gt;&amp; data, int flag = 0)
+<h2 id="求极值"><a href="#求极值" class="headerlink" title="求极值"></a>求极值</h2><p>由于我们求出来的是散点导数，而不是导数方程，所以直接通过<code>f&#39;(x) == 0</code>判断并不合适（因为散点并不一定落在x轴上）。过零点的两侧导数异号，看相邻两个点即可：<code>f&#39;(x - 1) * f&#39;(x) &lt;= 0</code>。</p>
+<pre><code class="language-c++">// flag &gt; 0 只要极大值（导数由正变负），flag &lt; 0 只要极小值（导数由负变正），0 则都要
+std::vector&lt;int&gt; extremum(const std::vector&lt;double&gt;&amp; data, int flag = 0)
 {
-    std::vector&lt;double&gt; dst;
-    for (int i = 1; i != data.size(); ++i) {
+    std::vector&lt;int&gt; dst;
+    for (int i = 1; i &lt; static_cast&lt;int&gt;(data.size()); ++i) {
         // 左右异号，则为极值
         if (data.at(i - 1) * data.at(i) &lt;= 0) {
-            if (flag &gt; 0) {
-                if (data.at(i - 1) &lt; 0 || data.at(i) &gt; 0) {
-                    continue;
-                }
-            } else if (flag &lt; 0) {
-                if (data.at(i - 1) &gt; 0 || data.at(i) &lt; 0) {
-                    continue;
-                }
+            if (flag &gt; 0 &amp;&amp; (data.at(i - 1) &lt; 0 || data.at(i) &gt; 0)) {
+                continue;
             }
-            else {  // flag == 0
-                ;
+            if (flag &lt; 0 &amp;&amp; (data.at(i - 1) &gt; 0 || data.at(i) &lt; 0)) {
+                continue;
             }
             // 取离0近的那个
             if (std::abs(data.at(i - 1)) &lt; std::abs(data.at(i))) {
@@ -552,16 +548,52 @@
 }
 </code></pre>
 <p>代码中的<code>flag</code>参数用于仅取极大值或极小值。</p>
-<h2 id="积分求面积"><a href="#积分求面积" class="headerlink" title="积分求面积"></a>积分求面积</h2><p><code>Σf(x-x0)</code>，x0即为要选择的底部，积分范围从上一个极小值到下一个极小值即可。</p>
-<p>我们的需求比较特殊，需要取值区间宽度固定，由于以第一个波峰作为基准，所以取其上一个极小值到下一个极小值的宽度的比值（实际取了三分之一）</p>
-<pre><code class="language-c++">double crest_area(const std::vector&lt;double&gt;&amp; data, const std::vector&lt;double&gt;&amp; extrem, int crest_index, int width_ratio = 3)
+<h2 id="积分求面积"><a href="#积分求面积" class="headerlink" title="积分求面积"></a>积分求面积</h2><p><code>Σ(f(x) - baseline)</code>，baseline 取这个波峰前一个极小值的高度。积分范围本来可以取上一个极小值到下一个极小值，我们的需求要固定窗口宽度：用第一个波峰「上一个极小值到下一个极小值」的距离除以 <code>width_ratio</code>（实际是三分之一），再以当前波峰为中心取这么宽。</p>
+<pre><code class="language-c++">double crest_area(const std::vector&lt;double&gt;&amp; data, const std::vector&lt;int&gt;&amp; minima,
+                  const std::vector&lt;int&gt;&amp; maxima, int crest_index, int index_offset, int width_ratio = 3)
 {
-    int width = (extrem.at(1) - extrem.at(0)) / width_ratio;
-    double bottom = data.at(extrem.at(1));
-    // 积分求面积
+    if (maxima.empty() || crest_index &lt; 0 || crest_index &gt;= static_cast&lt;int&gt;(maxima.size()) || width_ratio &lt;= 0) {
+        return 0;
+    }
+    int first_prev = -1;
+    int first_next = -1;
+    for (int i = 0; i != static_cast&lt;int&gt;(minima.size()); ++i) {
+        if (minima.at(i) &lt; maxima.at(0)) {
+            first_prev = minima.at(i);
+        } else if (first_next &lt; 0) {
+            first_next = minima.at(i);
+        }
+    }
+    if (first_prev &lt; 0 || first_next &lt; 0) {
+        return 0;
+    }
+    int width = (first_next - first_prev) / width_ratio;
+    if (width &lt;= 0) {
+        return 0;
+    }
+
+    int center = maxima.at(crest_index) + index_offset;
+    int prev = -1;
+    for (int i = 0; i != static_cast&lt;int&gt;(minima.size()); ++i) {
+        if (minima.at(i) &lt; maxima.at(crest_index)) {
+            prev = minima.at(i);
+        }
+    }
+    if (prev &lt; 0) {
+        return 0;
+    }
+    double bottom = data.at(prev + index_offset);
+    int begin = center - width / 2;
+    if (begin &lt; 0) {
+        begin = 0;
+    }
+    int end = begin + width;
+    if (end &gt; static_cast&lt;int&gt;(data.size())) {
+        end = static_cast&lt;int&gt;(data.size());
+    }
     double area = 0;
-    for (int i = -width; i != width; ++i) {
-        area += data.at(extrem.at(i * 2)) - bottom;
+    for (int i = begin; i != end; ++i) {
+        area += data.at(i) - bottom;
     }
     return area;
 }
@@ -574,18 +606,20 @@ std::vector&lt;double&gt; calc_crest_ratio(const std::vector&lt;double&gt;&amp; 
     auto blur_dst = blur(data, arg.kernel_size1, arg.center_value1);
     auto dv_dst = derivative(blur_dst, arg.dv_h_value);
     auto dv_blur_dst = blur(dv_dst, arg.kernel_size2, arg.center_value2);
-    auto full_extrem_dst = extremum(dv_blur_dst);
+    auto maxima = extremum(dv_blur_dst, 1);
+    auto minima = extremum(dv_blur_dst, -1);
+    int index_offset = 2 * arg.dv_h_value;
 
     std::vector&lt;double&gt; result;
-    if (full_extrem_dst.empty()) {
+    if (maxima.empty()) {
         return result;
     }
-    double first_crest_area = crest_area(blur_dst, full_extrem_dst, 0, arg.integral_width_ratio);
+    double first_crest_area = crest_area(blur_dst, minima, maxima, 0, index_offset, arg.integral_width_ratio);
     if (first_crest_area == 0) {
         return result;
     }
-    for (int i = 1; i != full_extrem_dst.size() / 2 + 1; ++i) {
-        double current_area = crest_area(blur_dst, full_extrem_dst, i, arg.integral_width_ratio);
+    for (int i = 1; i &lt; static_cast&lt;int&gt;(maxima.size()); ++i) {
+        double current_area = crest_area(blur_dst, minima, maxima, i, index_offset, arg.integral_width_ratio);
         result.push_back(current_area / first_crest_area);
     }
     return result;

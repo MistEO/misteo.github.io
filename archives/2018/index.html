@@ -363,8 +363,8 @@
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-            老规矩先上结论，通过contentItem.children访问即可
-var obj = listview.contentItem.children[index]
+            老规矩先上结论：已经创建出来的 delegate 在contentItem.children里，但这个下标不是 model 的 index
+var children = listview.contentItem.children
 
         
         &nbsp;&nbsp;&nbsp;
