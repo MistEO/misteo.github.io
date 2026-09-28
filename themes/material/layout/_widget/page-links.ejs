@@ -78,6 +78,13 @@
         line-height: 50px;
     }
 
+    .md-links-empty {
+        margin: 4em auto;
+        max-width: 36em;
+        line-height: 1.7;
+        color: #666;
+    }
+
     #scheme-Paradox .mdl-mini-footer{
         clear: left;
     }
@@ -87,6 +94,9 @@
 </style>
 
 <ul class="md-links">
+    <% if (!site.data.links || Object.keys(site.data.links).length === 0) { %>
+        <p class="md-links-empty">原来的友链域名都已经无法访问，列表先空着。</p>
+    <% } %>
     <% if (site.data.links) { %>
         <% for (var i in site.data.links) { %>
             <li class="md-links-item">

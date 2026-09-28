@@ -6,6 +6,10 @@ on:
       - source
   workflow_dispatch:
 
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
 permissions:
   contents: write
 

@@ -3,7 +3,7 @@
 
     <!-- Pic & Slogan -->
     <div class="mdl-card__media mdl-color-text--grey-50" style="background-image:url(<%= url_for(theme.img.daily_pic) %>)">
-        <p class="index-top-block-slogan"><a href="<%= theme.url.daily_pic %>">
+        <p class="index-top-block-slogan"><% if(theme.url.daily_pic && theme.url.daily_pic !== '#') { %><a href="<%= theme.url.daily_pic %>"><% } %>
         <% if(theme.uiux.slogan) { %>
             <% if(Array.isArray(theme.uiux.slogan)) { %>
                 <%- theme.uiux.slogan.join('<br>') %>
@@ -11,7 +11,7 @@
                 <%- theme.uiux.slogan %>
             <% } %>
         <% } %>
-        </a></p>
+        <% if(theme.url.daily_pic && theme.url.daily_pic !== '#') { %></a><% } %></p>
     </div>
 
     <!-- Avatar & Name -->
