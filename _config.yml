@@ -11,7 +11,7 @@ language: zh-CN
 timezone: Asia/Shanghai
 
 # URL
-url: http://www.misteo.top
+url: https://misteo.top
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
