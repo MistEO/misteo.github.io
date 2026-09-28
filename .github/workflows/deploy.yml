@@ -29,11 +29,11 @@ jobs:
         env:
           TZ: Asia/Shanghai
 
-      - name: Publish to master
+      - name: Publish to pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
-          publish_branch: master
+          publish_branch: pages
           cname: misteo.top
           commit_message: ${{ github.event.head_commit.message }}
