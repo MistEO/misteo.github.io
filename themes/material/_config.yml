@@ -175,7 +175,7 @@ sns:
 sns_share:
     twitter: false
     facebook: false
-    googleplus: true
+    googleplus: false
     weibo: true
     linkedin: false
     qq: true

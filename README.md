@@ -2,7 +2,7 @@
 
 MistEO 的博客，[www.misteo.top](http://www.misteo.top)。
 
-Hexo + [hexo-theme-material](https://github.com/viosey/hexo-theme-material) 1.5.2。
+Hexo 8 + [hexo-theme-material](https://github.com/viosey/hexo-theme-material) 1.5.2。
 
 ## 分支
 
