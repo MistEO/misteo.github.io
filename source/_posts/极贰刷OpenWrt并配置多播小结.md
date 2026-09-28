@@ -6,17 +6,17 @@ tags:
     - 教程
 ---
 
-这几天把公司宿舍的网络好好的折腾了一下，从平均10Mbps最高20Mbps勉强提升到了稳定30Mbps，总结一下心得
+这几天把公司宿舍的网络好好的折腾了一下，从平均10Mbps、最高20Mbps，勉强提升到了稳定30Mbps，总结一下心得
 
 <!-- more -->
 
 ## 获取Root
 
-云插件中安装`开发中模式`，好像还要关联微信什么的，GUI操作应该不困难，感觉没啥好说的，~~其实是因为好久以前弄的具体的我不记得了~~
+云插件中安装`开发者模式`，好像还要关联微信什么的，GUI操作应该不困难，感觉没啥好说的，~~其实是因为好久以前弄的具体的我不记得了~~
 
 ## 刷机
 
-注意以下命令行都是基于极贰（`HC5761`)，其他路由器同理，但需要改一下链接下载符合自己机型的文件不要直接复制
+注意以下命令行都是基于极贰（`HC5761`），其他路由器同理，但需要改一下链接，下载符合自己机型的文件，不要直接复制
 
 ### 连上极路由
 
@@ -77,4 +77,4 @@ sysupgrade -F -n openwrt-ramips-mt7620a-hc5761-squashfs-sysupgrade.bin
 - [AR/QCA/MTK Breed，功能强大的多线程 Bootloader ,恩山无线论坛](http://www.right.com.cn/forum/thread-161906-1-1.html)
 - [改华硕[N14U N54U]5G 2G的7620老毛子Padavan固件(私人云储存 aria2 QOS) ,恩山无线论坛](http://www.right.com.cn/forum/thread-161324-1-1.html)
 - [OpenWrt路由器macvlan单线多拨的方法 - CSDN博客](https://blog.csdn.net/lvshaorong/article/details/70568791)
-- [OpwnWrt 路由器MWAN3多线多拨实现方法 - CSDN博客](https://blog.csdn.net/lvshaorong/article/details/61916525)
+- [OpenWrt 路由器MWAN3多线多拨实现方法 - CSDN博客](https://blog.csdn.net/lvshaorong/article/details/61916525)
