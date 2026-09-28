@@ -86,7 +86,7 @@ ignore:
 # Extensions
 theme: material
 
-# Deployment is done by GitHub Actions, which publishes public/ to master.
+# Deployment is done by GitHub Actions, which publishes public/ to pages.
 deploy:
   type: ''
 
