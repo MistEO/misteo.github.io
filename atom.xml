@@ -10,7 +10,7 @@
   <rights>All rights reserved 2026, MistEO</rights>
   <subtitle>MistEO的博客</subtitle>
   <title>肝！</title>
-  <updated>2026-09-29T07:28:33.317Z</updated>
+  <updated>2026-09-30T16:47:56.198Z</updated>
   <entry>
     <author>
       <name>MistEO</name>
@@ -23,7 +23,7 @@
       <![CDATA[<p>2026 年 10 月 1–7 日。杭州飞成都，开一辆比亚迪海狮05（海狮5）DM-i 插混 SUV，顺时针走一小圈：映秀、萝卜寨、古尔沟、理小路、四姑娘山双桥沟、甲居，再经巴朗山隧道回成都。7 号早上看熊猫基地，去天府还车飞回杭州。</p>]]>
     </summary>
     <title>国庆七天自驾</title>
-    <updated>2026-09-29T07:28:33.317Z</updated>
+    <updated>2026-09-30T16:47:56.198Z</updated>
   </entry>
   <entry>
     <author>
@@ -38,7 +38,7 @@
       <![CDATA[<p><code>Pimpl</code>(Pointer to implementation)很多同学都不陌生，但是从原始指针升级到C++11的独占指针<code>std::unique_ptr</code>时，会遇到一个<code>incomplete type</code>的报错，本文来分析一下报错的原因以及分享几种解决方法~</p>]]>
     </summary>
     <title>std::unique_ptr使用incomplete type的报错分析和解决</title>
-    <updated>2026-09-29T07:28:33.317Z</updated>
+    <updated>2026-09-30T16:47:56.198Z</updated>
   </entry>
   <entry>
     <author>
@@ -61,7 +61,7 @@
 <p>分享下它的实现和一些个人理解</p>]]>
     </summary>
     <title>安全的字符串拷贝strcpy_s的实现与理解</title>
-    <updated>2026-09-29T07:28:33.317Z</updated>
+    <updated>2026-09-30T16:47:56.198Z</updated>
   </entry>
   <entry>
     <author>
@@ -76,7 +76,7 @@
       <![CDATA[<p>前段时间接到了个需求，数据是几千个散点，绘制出来波形图，有多个波峰，需求是求出各个波峰与第一个波峰的面积比值。乍一看需求有点难以实现，其实细化成各个模块之后也算比较简单，在这里总结一下经验方法</p>]]>
     </summary>
     <title>散点波形图求峰值面积比</title>
-    <updated>2026-09-29T07:28:33.317Z</updated>
+    <updated>2026-09-30T16:47:56.198Z</updated>
   </entry>
   <entry>
     <author>
@@ -92,7 +92,7 @@
 </code></pre>]]>
     </summary>
     <title>QML中ListView访问子组件</title>
-    <updated>2026-09-29T07:28:33.317Z</updated>
+    <updated>2026-09-30T16:47:56.198Z</updated>
   </entry>
   <entry>
     <author>
@@ -107,7 +107,7 @@
       <![CDATA[<p>这几天把公司宿舍的网络好好的折腾了一下，从平均10Mbps、最高20Mbps，勉强提升到了稳定30Mbps，总结一下心得</p>]]>
     </summary>
     <title>HC5761刷OpenWrt并配置多播小结</title>
-    <updated>2026-09-29T07:28:33.317Z</updated>
+    <updated>2026-09-30T16:47:56.198Z</updated>
   </entry>
   <entry>
     <author>
@@ -122,7 +122,7 @@
       <![CDATA[<p>先上结论：<strong>Ubuntu 16.04 x64下，目前没有i3-8100的核显UHD630的驱动</strong>，所以别想了，加张独显吧！</p>]]>
     </summary>
     <title>记一次Ubuntu下失败的显卡驱动安装</title>
-    <updated>2026-09-29T07:28:33.317Z</updated>
+    <updated>2026-09-30T16:47:56.198Z</updated>
   </entry>
   <entry>
     <author>
@@ -137,7 +137,7 @@
       <![CDATA[<p>既然说好的打造技术博客，总得写点干货什么的，正好前些日子买了个新的ss服务，买完才注意到加密方式是<code>chacha20-ietf-poly1305</code>，再一看Shadowsocks-Qt5在Ubuntu的软件源里面最新版本只是2.9，不支持啊，于是只能自己研究一下怎么弄了，遇到了不少坑，和大家分享一下经验方法。</p>]]>
     </summary>
     <title>Ubuntu下源码编译安装最新版Shadowsocks-Qt5</title>
-    <updated>2026-09-29T07:28:33.317Z</updated>
+    <updated>2026-09-30T16:47:56.198Z</updated>
   </entry>
   <entry>
     <author>
@@ -151,6 +151,6 @@
       <![CDATA[<p>emmm，这大概就是第一篇博文了</p>]]>
     </summary>
     <title>Hello Hexo</title>
-    <updated>2026-09-29T07:28:33.317Z</updated>
+    <updated>2026-09-30T16:47:56.198Z</updated>
   </entry>
 </feed>
